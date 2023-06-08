@@ -10,10 +10,14 @@ namespace e_commerce_store.Models
         public int CartId { get; set; }
 
         [Display(Name = "User ID")]
-        public int UserId { get; set; }
+        [Required]
+        public int AppUserId { get; set; }
+        [ForeignKey("AppUserId")]
+        public AppUser AppUser { get; set; }       
+
 
         [Display(Name = "Cart Items")]
-        public List<CartItems>? CartItems { get; set; }
+        public List<CartItem>? CartItems { get; set; }
 
         [Display(Name = "Total Price")]
         [Column(TypeName = "decimal(18, 2)")]

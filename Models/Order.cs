@@ -7,35 +7,36 @@ namespace e_commerce_store.Models
         [Key]
         public int OrderId { get; set; }    
 
-        [ForeignKey("UserId")]
-        public int UserId { get; set; }
+        public int AppUserId { get; set; }
+        [ForeignKey("AppUserId")]
+        public AppUser AppUser { get; set; }
 
 
         [MinLength(1)]
         [Required]
-        public List<OrderItems>? OrderItems { get; set; }  
+        public List<OrderItem>? OrderItems { get; set; }  
 
         [Display(Name = "First Name")]
         [Required]
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required]
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
-        public string? Address { get; set; }
+        public string Address { get; set; }
 
         [Display(Name = "Address 2")]
         [Required]
-        public string? Address2 { get; set; }
+        public string Address2 { get; set; }
 
         [Required]
-        public string? City { get; set; }
+        public string City { get; set; }
         [Required]
-        public string? State { get; set; }
+        public string State { get; set; }
         [Required]
-        public string? CreditCard { get; set; }
+        public string CreditCard { get; set; }
 
 
     }

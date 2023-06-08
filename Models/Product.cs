@@ -8,11 +8,11 @@ namespace e_commerce_store.Models
         [Key]
         [Display(Name = "ID")]
         public int ProductId { get; set; }
-        public string? SKU { get; set; }
+        public string SKU { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         [RegularExpression(@"^[1-9]\d{0,7}(?:\.\d{1,4})?|\.\d{1,4}$")]
@@ -29,8 +29,9 @@ namespace e_commerce_store.Models
         public DateTime ReleaseDate { get; set; }
 
         [Display(Name = "Category ID")]
-        [ForeignKey("CategoryId")]
         public int CategoryId { get; set; } 
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
 
     }
 }
