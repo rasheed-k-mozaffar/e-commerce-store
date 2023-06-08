@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/ismael/repos/e-commerce-store/e-commerce-store.csproj": {}
+    "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj": {}
   },
   "projects": {
-    "/home/ismael/repos/e-commerce-store/e-commerce-store.csproj": {
+    "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ismael/repos/e-commerce-store/e-commerce-store.csproj",
+        "projectUniqueName": "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj",
         "projectName": "e-commerce-store",
-        "projectPath": "/home/ismael/repos/e-commerce-store/e-commerce-store.csproj",
+        "projectPath": "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj",
         "packagesPath": "/home/ismael/.nuget/packages/",
-        "outputPath": "/home/ismael/repos/e-commerce-store/obj/",
+        "outputPath": "/home/ismael/Desktop/e-commerce-store/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/ismael/.nuget/NuGet/NuGet.Config"
@@ -53,6 +53,8 @@
               "version": "[7.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
             },
