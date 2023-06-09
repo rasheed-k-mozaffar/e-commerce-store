@@ -18,7 +18,7 @@ namespace e_commerce_store.Models
         public int? ParentCategoryId { get; set; }
         [ForeignKey("ParentCategoryId")]
         public Category ParentCategory { get; set; }
-        public List<Category> ChildCategories { get; set; }
+        public List<Category>? ChildCategories { get; set; }
 
     }
 }

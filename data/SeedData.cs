@@ -11,6 +11,14 @@ namespace e_commerce_store.data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDbContext>>()))
             {
+
+                if(context.Categories.Any()){
+                    return;
+                }
+                context.Categories.AddRange (new Category{
+                    CategoryName = "Mobile",
+                });
+                
                 // Look for any movies.
                 if (context.Products.Any())
                 {
