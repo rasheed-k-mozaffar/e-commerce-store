@@ -11,14 +11,6 @@ namespace e_commerce_store.data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDbContext>>()))
             {
-
-                if(context.Categories.Any()){
-                    return;
-                }
-                context.Categories.AddRange (new Category{
-                    CategoryName = "Mobile",
-                });
-                
                 // Look for any movies.
                 if (context.Products.Any())
                 {
@@ -33,7 +25,7 @@ namespace e_commerce_store.data
                     Price = 4000,
                     SKU = "8hf877dg8u4i4" ,
                     Derscription = "its iphone",
-                    ImageURL = "wwwroot/image/phone1"
+                    ImageURL = "wwwroot/Image/phone1.png"
 
                 },
                 new Product
@@ -44,8 +36,7 @@ namespace e_commerce_store.data
                     Price = 4000,
                     SKU = "8hf8737dg8u4i4" ,
                     Derscription = "its samsung",
-                    ImageURL = "wwwroot/image/phone2"
-
+                    ImageURL = "wwwroot/Image/phone2.png"
                 }
                 );
                 context.SaveChanges();

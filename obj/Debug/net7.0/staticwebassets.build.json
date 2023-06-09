@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kVVYSaH49qTSeY7axthfd3+Y4tO5Ms5+lsN+wDyRpbc=",
+  "Hash": "9iCbCyTbPi4AhDSoaH4GPAwn9VWRCgwnNfB/T273RuQ=",
   "Source": "e-commerce-store",
   "BasePath": "_content/e-commerce-store",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/phone1.png",
+      "SourceId": "e-commerce-store",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ismael/Desktop/e-commerce-store/wwwroot/",
+      "BasePath": "_content/e-commerce-store",
+      "RelativePath": "Image/phone1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Image/phone1.png"
+    },
+    {
+      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/phone2.png",
+      "SourceId": "e-commerce-store",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ismael/Desktop/e-commerce-store/wwwroot/",
+      "BasePath": "_content/e-commerce-store",
+      "RelativePath": "Image/phone2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Image/phone2.png"
     },
     {
       "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/js/site.js",

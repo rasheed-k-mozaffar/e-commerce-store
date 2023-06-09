@@ -1,21 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
-
+using e_commerce_store.data;
+using e_commerce_store.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace e_commerce_store.Controllers
 {
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
+        ApplicationDbContext _context;
+        public ProductController(ApplicationDbContext context){
+            _context = context;
         }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Index()
         {
-            return View("Error!");
+        var products = _context.Products
+        .Include(c => c.Category)
+        .AsNoTracking();
+            return View(await products.ToListAsync());
         }
 
     }
