@@ -1,5 +1,7 @@
 using System.Collections.Immutable;
 using e_commerce_store.data;
+using e_commerce_store.Models.Interfaces;
+using e_commerce_store.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +19,7 @@ else
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IProductRepository,ProductRepository>();
 var app = builder.Build();
 
 
