@@ -6,7 +6,6 @@ using e_commerce_store.Models.Interfaces;
 
 namespace e_commerce_store.Controllers
 {
-    [Route("[controller]")]
     public class ProductController : Controller
     {
         IProductRepository _context;
@@ -15,8 +14,17 @@ namespace e_commerce_store.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var products = _context.GetAll();
+            var products = await _context.GetAll();
             return View(products);       
+        }
+
+        public async Task<IActionResult> Detail(int id){
+            var product = await _context.GetByIdAsync(id);
+            // if (product == null)
+            // {
+            //     return NotFound();
+            // }
+            return View(product);
         }
 
     }
