@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "krY9dJ3f0EZYj8BpIpGFMWqe9+PIzfFZKtjYE4sPbzU=",
+  "Hash": "9iCbCyTbPi4AhDSoaH4GPAwn9VWRCgwnNfB/T273RuQ=",
   "Source": "e-commerce-store",
   "BasePath": "_content/e-commerce-store",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
-    },
-    {
-      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/ISE_BSP501_F22_Homework.pdf",
-      "SourceId": "e-commerce-store",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/ismael/Desktop/e-commerce-store/wwwroot/",
-      "BasePath": "_content/e-commerce-store",
-      "RelativePath": "Image/ISE_BSP501_F22_Homework.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Image/ISE_BSP501_F22_Homework.pdf"
     },
     {
       "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/phone1.png",

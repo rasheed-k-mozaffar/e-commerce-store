@@ -4,7 +4,7 @@ namespace e_commerce_store.Models.Interfaces
     {
         Task<IEnumerable<Product>> GetAll();
 
-        Task<Product?> GetByIdAsync(int id);
+        Task<Product?> GetByIdAsync(int? id);
 
         Task<IEnumerable<Product>> GetClubByCategory(int category);
 
@@ -13,6 +13,8 @@ namespace e_commerce_store.Models.Interfaces
         bool Update(Product product);
 
         bool Delete(Product product);
+
+        bool ProductExist(int id);
 
         bool Save();
     }
