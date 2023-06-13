@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YAN7nNtZq0JrI6A0bZNwmc0CfHEohKNwImgbleRGBq5XoD5dHAbuEPmLulISmyv4Ty896Hc9q3Ryyt7YAeIIlA==",
+  "dgSpecHash": "dp0RZ1PR50mx12O7zFSdL3rB2gSlOYDhuVzBGtcrm2LS58MGuFxkDy0u3Lsk9fIVBFcCDw4sDHI2+Empu3Qk5w==",
   "success": true,
-  "projectFilePath": "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj",
+  "projectFilePath": "/home/ismael/e-commerce-store/e-commerce-store.csproj",
   "expectedPackageFiles": [
     "/home/ismael/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/ismael/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",

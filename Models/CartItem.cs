@@ -21,19 +21,6 @@ namespace e_commerce_store.Models
         [Required]
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }     
-
-        [Display(Name = "Created Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Required]
-        public DateTime CreatedAt { get; set; }
-
-        
-        [Display(Name = "Modified Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? ModifiedAt { get; set; }  
-        
+        public Product Product { get; set; }            
     }
 }

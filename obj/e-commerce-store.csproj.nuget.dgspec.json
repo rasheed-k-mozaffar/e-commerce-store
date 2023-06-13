@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj": {}
+    "/home/ismael/e-commerce-store/e-commerce-store.csproj": {}
   },
   "projects": {
-    "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj": {
+    "/home/ismael/e-commerce-store/e-commerce-store.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj",
+        "projectUniqueName": "/home/ismael/e-commerce-store/e-commerce-store.csproj",
         "projectName": "e-commerce-store",
-        "projectPath": "/home/ismael/Desktop/e-commerce-store/e-commerce-store.csproj",
+        "projectPath": "/home/ismael/e-commerce-store/e-commerce-store.csproj",
         "packagesPath": "/home/ismael/.nuget/packages/",
-        "outputPath": "/home/ismael/Desktop/e-commerce-store/obj/",
+        "outputPath": "/home/ismael/e-commerce-store/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/ismael/.nuget/NuGet/NuGet.Config"
