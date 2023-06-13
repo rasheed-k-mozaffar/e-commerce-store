@@ -8,11 +8,11 @@ namespace e_commerce_store.Models
     {
         [Key]
         [Display(Name = "ID")]
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Category Name")]
         [Required]
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Parent Category ID")]
         public int? ParentCategoryId { get; set; }

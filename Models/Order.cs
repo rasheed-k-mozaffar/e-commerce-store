@@ -5,7 +5,7 @@ namespace e_commerce_store.Models
     public class Order
     {
         [Key]
-        public int OrderId { get; set; }    
+        public int Id { get; set; }    
 
         public int AppUserId { get; set; }
         [ForeignKey("AppUserId")]

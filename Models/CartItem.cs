@@ -9,7 +9,7 @@ namespace e_commerce_store.Models
         [Key]
         [Required]
         [Display(Name = "ID")]
-        public int CartItemId { get; set; } 
+        public int Id { get; set; } 
 
         [Display(Name = "Cart ID")]
         [Required]

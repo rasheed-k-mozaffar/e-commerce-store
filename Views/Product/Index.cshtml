@@ -23,14 +23,14 @@
         <img class="" src="@item.ImageURL" width="220" height="225" />
         <div class="card-body">
           <p class="card-text">@item.Name</p>
-          <p class="card-text">@item.Derscription</p>
+          <p class="card-text">@item.Description</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
               <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
             </div>
             <small class="text-body-secondary">Price:@item.Price</small>
-            <small class="text-body-secondary">Category:@Html.DisplayFor(modelItem => item.Category.CategoryName)</small>
+            <small class="text-body-secondary">Category:@Html.DisplayFor(modelItem => item.Category.Name)</small>
           </div>
         </div>
       </div>

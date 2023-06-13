@@ -10,7 +10,7 @@ namespace e_commerce_store.Models
     {
 
         [Key]
-        public int AppUserID { get; set; }  
+        public int Id { get; set; }  
 
         public string FirstName { get; set; }   
 

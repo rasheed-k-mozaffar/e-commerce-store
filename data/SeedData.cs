@@ -24,7 +24,7 @@ namespace e_commerce_store.data
                     CategoryId = 1,
                     Price = 4000,
                     SKU = "8hf877dg8u4i4" ,
-                    Derscription = "its iphone",
+                    Description = "its iphone",
                     ImageURL = "wwwroot/Image/phone1.png"
 
                 },
@@ -35,7 +35,7 @@ namespace e_commerce_store.data
                     CategoryId = 1,
                     Price = 4000,
                     SKU = "8hf8737dg8u4i4" ,
-                    Derscription = "its samsung",
+                    Description = "its samsung",
                     ImageURL = "wwwroot/Image/phone2.png"
                 }
                 );

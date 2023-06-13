@@ -7,7 +7,7 @@ namespace e_commerce_store.Models
     {
         [Key]
         [Display(Name = "ID")]
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         public string SKU { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
@@ -19,7 +19,7 @@ namespace e_commerce_store.Models
         [Required]   
         public decimal Price { get; set; }  
 
-        public string? Derscription { get; set; }
+        public string? Description { get; set; }
 
         public string? ImageURL { get; set; }    
 
