@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/e-commerce-store.bundle.scp.css"
     },
     {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/E77.png",
+      "PackagePath": "staticwebassets/Image/E77.png"
+    },
+    {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/E775.png",
+      "PackagePath": "staticwebassets/Image/E775.png"
+    },
+    {
       "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/phone1.png",
       "PackagePath": "staticwebassets/Image/phone1.png"
     },

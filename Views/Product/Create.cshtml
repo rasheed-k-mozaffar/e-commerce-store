@@ -1,9 +1,9 @@
-@model Product
+@model e_commerce_store.ViewModels.CreateProductViewModel
 @{
     ViewData["Title"] = "Create Product";
 }
 
-<form>
+<form asp-action="Create" enctype="multipart/form-data">
   <div class="form-group">
     <label asp-for="Name">Name</label>
     <input asp-for="Name" type="text" class="form-control"  placeholder="Enter Name">
@@ -15,13 +15,14 @@
     <span asp-validation-for="SKU" class="text-danger"></span>
   </div>
   <div class="form-group">
-    <label asp-for="Derscription" for="Derscription">Derscription</label>
-    <input asp-for="Derscription" type="text" class="form-control" placeholder="Descreption">
-    <span asp-validation-for="Derscription" class="text-danger"></span>
+    <label asp-for="Description" for="Description">Description</label>
+    <input asp-for="Description" type="text" class="form-control" placeholder="Descreption">
+    <span asp-validation-for="Description" class="text-danger"></span>
   </div>
     <div class="form-group">
-    <label asp-for="ImageURL" for="ImageURL">Image</label>
-    <input asp-for="ImageURL" type="url" class="form-control" placeholder="Image URL">
+    <label asp-for="File">Image</label>
+    <input asp-for="File" type="file" class="form-control form-control-lg" placeholder="Image" />
+    <span asp-validation-for="File" class="text-danger"></span>
   </div>
   <div class="form-group">
     <label asp-for="Price" for="Price">Price</label>
@@ -29,9 +30,13 @@
     <span asp-validation-for="Price" class="text-danger"></span>
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Category</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label asp-for="ReleaseDate">Release Date</label>
+    <input asp-for="ReleaseDate" type="datetime-local" />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group">
+    <label asp-for="CategoryId" class="control-label"></label>
+    <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control"></select>
+    <span asp-validation-for="CategoryId" class="text-danger"></span>
+  </div>
+  <button asp-page-handler="Upload" type="submit" class="btn btn-primary">Add</button>
 </form>

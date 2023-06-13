@@ -35,10 +35,10 @@ namespace e_commerce_store.Models.Repository
 
         public async Task<Product?> GetByIdAsync(int? id)
         {
-            return await _context.Products.Include(item => item.Category).FirstOrDefaultAsync(i => i.ProductId == id);
+            return await _context.Products.Include(item => item.Category).FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<Product>> GetClubByCategory(int category)
+        public async Task<IEnumerable<Product>> GetProductByCategory(int category)
         {
             return await _context.Products.Include(item => item.Category).AsNoTracking().Where(i => i.CategoryId == category).ToListAsync();
         }
@@ -50,7 +50,7 @@ namespace e_commerce_store.Models.Repository
         }
 
         public bool ProductExist(int id){
-            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
     }

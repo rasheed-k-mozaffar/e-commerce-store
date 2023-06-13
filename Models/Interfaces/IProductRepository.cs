@@ -6,7 +6,7 @@ namespace e_commerce_store.Models.Interfaces
 
         Task<Product?> GetByIdAsync(int? id);
 
-        Task<IEnumerable<Product>> GetClubByCategory(int category);
+        Task<IEnumerable<Product>> GetProductByCategory(int category);
 
         bool Add(Product product);
 
