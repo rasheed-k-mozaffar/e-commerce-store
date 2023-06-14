@@ -11,7 +11,7 @@ namespace e_commerce_store.Models
 
         [Display(Name = "User ID")]
         [Required]
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
         [ForeignKey("AppUserId")]
         public AppUser AppUser { get; set; }       
 

@@ -1,7 +1,10 @@
 using System.Collections.Immutable;
 using e_commerce_store.data;
+using e_commerce_store.Models;
 using e_commerce_store.Models.Interfaces;
 using e_commerce_store.Models.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,14 +24,22 @@ else
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
-var app = builder.Build();
 
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+       .AddCookie();
+
+var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
     SeedData.Initialize(services);
+    await SeedData.SeedUsersAndRolesAsync(app);
 }
 
 // Configure the HTTP request pipeline.

@@ -7,7 +7,7 @@ namespace e_commerce_store.Models
         [Key]
         public int Id { get; set; }    
 
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
         [ForeignKey("AppUserId")]
         public AppUser AppUser { get; set; }
 

@@ -604,3 +604,9 @@
 /home/ismael/e-commerce-store/obj/Debug/net7.0/e-commerce-store.pdb
 /home/ismael/e-commerce-store/obj/Debug/net7.0/e-commerce-store.genruntimeconfig.cache
 /home/ismael/e-commerce-store/obj/Debug/net7.0/ref/e-commerce-store.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/home/ismael/e-commerce-store/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
