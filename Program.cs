@@ -1,9 +1,9 @@
-using System.Collections.Immutable;
 using e_commerce_store.data;
 using e_commerce_store.Models;
 using e_commerce_store.Models.Interfaces;
 using e_commerce_store.Models.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +31,11 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdministratorRole", policy =>
+          policy.RequireRole("admin"));
+});
 
 var app = builder.Build();
 
@@ -39,7 +44,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     SeedData.Initialize(services);
-    await SeedData.SeedUsersAndRolesAsync(app);
+   // await SeedData.SeedUsersAndRolesAsync(app);
 }
 
 // Configure the HTTP request pipeline.
@@ -50,13 +55,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

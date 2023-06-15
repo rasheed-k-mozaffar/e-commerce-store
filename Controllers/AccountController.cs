@@ -97,7 +97,7 @@ namespace e_commerce_store.Controllers
             return RedirectToAction("Index", "Product");
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

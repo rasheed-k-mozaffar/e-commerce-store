@@ -3,6 +3,8 @@ using e_commerce_store.Models;
 using Microsoft.EntityFrameworkCore;
 using e_commerce_store.Models.Interfaces;
 using e_commerce_store.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using e_commerce_store.data;
 
 namespace e_commerce_store.Controllers
 {
@@ -17,12 +19,15 @@ namespace e_commerce_store.Controllers
             _categoryRepository = categoryRepository;
             _env = env;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await _productRepository.GetAll();
             return View(products);       
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Detail(int id){
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
@@ -32,6 +37,7 @@ namespace e_commerce_store.Controllers
             return View(product);
         }
 
+        [Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult Create(){
             var productVM = new CreateProductViewModel();
             productVM.Categories = _categoryRepository.GetAll();
@@ -39,6 +45,7 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Create(CreateProductViewModel productVM)
         {
             if (ModelState.IsValid)
@@ -77,6 +84,7 @@ namespace e_commerce_store.Controllers
 
 
         // GET: Movies/Edit/5
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Edit(int id)
         {
             if (_productRepository.GetAll == null)
@@ -94,6 +102,7 @@ namespace e_commerce_store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Edit(int id,Product product)
         {
             if (id != product.Id)
@@ -124,6 +133,7 @@ namespace e_commerce_store.Controllers
         }
 
         // GET: Movies/Delete/5
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (_productRepository.GetAll == null)
@@ -142,6 +152,7 @@ namespace e_commerce_store.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_productRepository.GetAll == null)
