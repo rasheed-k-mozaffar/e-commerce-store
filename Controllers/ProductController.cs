@@ -37,7 +37,7 @@ namespace e_commerce_store.Controllers
             return View(product);
         }
 
-        [Authorize(Policy = "RequireAdministratorRole")]
+        [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Create(){
             var productVM = new CreateProductViewModel();
             productVM.Categories = _categoryRepository.GetAll();

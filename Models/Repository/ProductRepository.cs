@@ -35,7 +35,7 @@ namespace e_commerce_store.Models.Repository
 
         public async Task<Product?> GetByIdAsync(int? id)
         {
-            return await _context.Products.Include(item => item.Category).FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Products.Include(item => item.Category).SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<IEnumerable<Product>> GetProductByCategory(int category)

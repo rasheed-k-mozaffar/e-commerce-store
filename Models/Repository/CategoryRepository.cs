@@ -36,7 +36,7 @@ namespace e_commerce_store.Models.Repository
 
         public async Task<Category?> GetByIdAsync(int? id)
         {
-            return await _context.Categories.FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Categories.SingleOrDefaultAsync(i => i.Id == id);
         }
 
 
