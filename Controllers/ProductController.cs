@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using e_commerce_store.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,22 +30,31 @@ namespace e_commerce_store.Controllers
                 return NotFound();
             }
 
-            // if category is -1 (All) dont filter else filter by selected category
-            var products = categoryId switch
-            {
-                -1 => await _productRepository.GetSliceAsync((page - 1) * pageSize, pageSize),
-                _ => await _productRepository.GetProductsByCategoryAndSliceAsync(categoryId, (page - 1) * pageSize, pageSize),
-            };
+            IEnumerable<Product> products;
+            int count;
 
-            var count = categoryId switch
+            if (!String.IsNullOrEmpty(searchString) && !searchString.Equals(""))
             {
-                -1 => await _productRepository.GetCountAsync(),
-                _ => await _productRepository.GetCountByCategoryAsync(categoryId),
-            };
-
-            if (!String.IsNullOrEmpty(searchString))
+                if(categoryId == -1){
+                    products = await _productRepository.SearchAndSliceAsync(searchString,(page - 1) * pageSize, pageSize);
+                    count = await _productRepository.GetCountBySearchAsync(searchString);
+                }else{
+                    products = await _productRepository.SearchByCategoryAndSliceAsync(searchString,categoryId,(page - 1) * pageSize, pageSize);
+                    count = await _productRepository.GetCountBySearchWithCategoryAsync(searchString,categoryId);
+                }
+            }else
             {
-                products = products.Where(s => s.Name.ToLower().Contains(searchString.ToLower()));
+                count = categoryId switch
+                {
+                    -1 => await _productRepository.GetCountAsync(),
+                    _ => await _productRepository.GetCountByCategoryAsync(categoryId),
+                };
+                products = categoryId switch
+                {
+                    -1 => await _productRepository.GetSliceAsync((page - 1) * pageSize, pageSize),
+                    _ => await _productRepository.GetProductsByCategoryAndSliceAsync(categoryId, (page - 1) * pageSize, pageSize),
+                };
+                
             }
 
             var productViewModel = new IndexProductViewModel

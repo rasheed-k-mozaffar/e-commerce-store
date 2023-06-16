@@ -20,13 +20,15 @@ namespace e_commerce_store.Models.Interfaces
         bool Save();
 
         Task<int> GetCountAsync();
+        Task<int> GetCountBySearchAsync(string searchString);
+        Task<int> GetCountBySearchWithCategoryAsync(string searchString , int CategoryId);
 
         Task<IEnumerable<Product>> GetProductsByCategoryAndSliceAsync(int categoryID, int offset, int size);
 
         Task<IEnumerable<Product>> GetProductsByPriceAndSliceAsync(int priceMax,int priceMin,int categoryID, int offset, int size);
-
+        Task<IEnumerable<Product>>  SearchAndSliceAsync(string searchString , int offset, int size);
+        Task<IEnumerable<Product>> SearchByCategoryAndSliceAsync(string searchString , int categoryId , int offset, int size);
         Task<int> GetCountByCategoryAsync(int categoryID);
-
-Task<int> GetCountByPriceAsync(int categoryID, int priceMax,int priceMin);
+        Task<int> GetCountByPriceAsync(int categoryID, int priceMax,int priceMin);
     }
 }
