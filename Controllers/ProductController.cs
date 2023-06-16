@@ -21,10 +21,44 @@ namespace e_commerce_store.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        [Route("Products")]
+        public async Task<IActionResult> Index(string searchString, int categoryId = -1, int page = 1, int pageSize = 3)
         {
-            var products = await _productRepository.GetAll();
-            return View(products);       
+            if (page < 1 || pageSize < 1 || categoryId < -1 || pageSize > 40)
+            {
+                return NotFound();
+            }
+
+            // if category is -1 (All) dont filter else filter by selected category
+            var products = categoryId switch
+            {
+                -1 => await _productRepository.GetSliceAsync((page - 1) * pageSize, pageSize),
+                _ => await _productRepository.GetProductsByCategoryAndSliceAsync(categoryId, (page - 1) * pageSize, pageSize),
+            };
+
+            var count = categoryId switch
+            {
+                -1 => await _productRepository.GetCountAsync(),
+                _ => await _productRepository.GetCountByCategoryAsync(categoryId),
+            };
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.ToLower().Contains(searchString.ToLower()));
+            }
+
+            var productViewModel = new IndexProductViewModel
+            {
+                Products = products,
+                Page = page,
+                PageSize = pageSize,
+                TotalProducts = count,
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+                CategoryId = categoryId,
+                Categories = _categoryRepository.GetAll()
+            };
+
+            return View(productViewModel);    
         }
 
         [AllowAnonymous]
@@ -36,6 +70,11 @@ namespace e_commerce_store.Controllers
             }
             return View(product);
         }
+
+                
+
+
+
 
         [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Create(){

@@ -53,5 +53,55 @@ namespace e_commerce_store.Models.Repository
             return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Products.CountAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetSliceAsync(int offset, int size)
+        {
+            return await _context.Products.Include(i => i.Category).Skip(offset).Take(size).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAndSliceAsync(int categoryID, int offset, int size)
+        {
+            return await _context.Products
+                .Include(i => i.Category)
+                .Where(c => c.CategoryId == categoryID)
+                .Skip(offset)
+                .Take(size)
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Product>> GetProductsByPriceAndSliceAsync(int priceMax,int priceMin ,int categoryID, int offset, int size)
+        {
+            if(categoryID == -1)
+                return await _context.Products
+                .Include(i => i.Category)
+                .Where(c => c.Price <= priceMax && c.Price >= priceMin)
+                .Skip(offset)
+                .Take(size)
+                .ToListAsync();
+            else
+                return await _context.Products
+                    .Include(i => i.Category)
+                    .Where(c => c.CategoryId == categoryID &&  (c.Price <= priceMax && c.Price >= priceMin))
+                    .Skip(offset)
+                    .Take(size)
+                    .ToListAsync();
+        }
+        
+        public async Task<int> GetCountByCategoryAsync(int categoryID)
+        {
+            return await _context.Products.CountAsync(c => c.CategoryId == categoryID);
+        }
+
+        public async Task<int> GetCountByPriceAsync(int categoryID, int priceMax,int priceMin)
+        {
+            if(categoryID == -1)
+                return await _context.Products.CountAsync(c => c.Price <= priceMax && c.Price >= priceMin);
+            else
+                return await _context.Products.CountAsync(c => c.CategoryId == categoryID &&  (c.Price <= priceMax && c.Price >= priceMin));
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace e_commerce_store.Models.Interfaces
         Task<IEnumerable<Product>> GetAll();
 
         Task<Product?> GetByIdAsync(int? id);
+        Task<IEnumerable<Product>> GetSliceAsync(int offset, int size);
 
         Task<IEnumerable<Product>> GetProductByCategory(int category);
 
@@ -17,5 +18,15 @@ namespace e_commerce_store.Models.Interfaces
         bool ProductExist(int id);
 
         bool Save();
+
+        Task<int> GetCountAsync();
+
+        Task<IEnumerable<Product>> GetProductsByCategoryAndSliceAsync(int categoryID, int offset, int size);
+
+        Task<IEnumerable<Product>> GetProductsByPriceAndSliceAsync(int priceMax,int priceMin,int categoryID, int offset, int size);
+
+        Task<int> GetCountByCategoryAsync(int categoryID);
+
+Task<int> GetCountByPriceAsync(int categoryID, int priceMax,int priceMin);
     }
 }

@@ -1,23 +1,29 @@
-@model IEnumerable<Product>
+@using e_commerce_store.ViewModels
+@model IndexProductViewModel
+
 @{
     ViewData["Title"] = "Products";
+    //Page*PageSize = the Products on this page and + 1 to get number of first item on this page
+    int resultStart = ((Model.Page - 1) * Model.PageSize) + 1;
+    //to ensure that no more results are displayed than there are total products.
+    int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
 }
-
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Album example</h1>
-      <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-      </p>
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId, "Category")
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
     </div>
-  </div>
-</section>
-
+    <button type="submit" class="btn btn-primary">Filter</button>
+}
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p>
+}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  @foreach (var item in Model) {
+  @foreach (var item in Model.Products) {
     <div class="col">
       <div class="bd-placeholder-img card shadow-sm">
         <img class="" src="@item.ImageURL" width="220" height="225" />
@@ -35,4 +41,32 @@
       </div>
     </div>
 }
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.Page - 1, categoryId = Model.CategoryId})">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i, categoryId = Model.CategoryId})">@i</a>
+                    </li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.Page + 1,  categoryId = Model.CategoryId })">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
 </div>
