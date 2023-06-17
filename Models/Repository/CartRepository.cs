@@ -12,10 +12,6 @@ namespace e_commerce_store.Models.Repository
             _context = context;
             _cartItemRepository = cartItemRepository;
         }
-        public bool ClearCartItems()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Cart> GetCartByUserId(string? userId)
         {
@@ -44,12 +40,18 @@ namespace e_commerce_store.Models.Repository
             foreach(var item in itemsToRemove){
                 _cartItemRepository.Remove(item);
             }
+            Save();
         }
 
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0;
+        }
+
+        public async Task<decimal> GetTotalPrice(Cart cart)
+        {
+            return cart.CartItems.Sum(item => item.Quantity * item.Product.Price);
         }
     }
 }

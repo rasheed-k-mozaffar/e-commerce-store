@@ -1,0 +1,75 @@
+@model e_commerce_store.ViewModels.CheckOutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName)
+        @Html.DisplayFor(model => model.UserName)
+        @Html.HiddenFor(model => model.UserName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserEmail)
+        @Html.DisplayFor(model => model.UserEmail)
+        @Html.HiddenFor(model => model.UserEmail)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber)
+        @Html.ValidationMessageFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName)
+        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.City)
+        @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.City)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address1)
+        @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Address1)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address2)
+        @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Address2)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TotalPrice)
+        @Html.DisplayFor(model => model.TotalPrice)
+        @Html.HiddenFor(model => model.TotalPrice)
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Place Order</button>
+}
+
+<style>
+    .field-validation-error {
+        color: red;
+        font-size: 14px;
+    }
+</style>

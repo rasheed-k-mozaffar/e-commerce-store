@@ -25,6 +25,10 @@ namespace e_commerce_store.Models
         public string LastName { get; set; }
 
         [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         public string Address { get; set; }
 
         [Display(Name = "Address 2")]
@@ -33,11 +37,11 @@ namespace e_commerce_store.Models
 
         [Required]
         public string City { get; set; }
-        [Required]
-        public string State { get; set; }
-        [Required]
-        public string CreditCard { get; set; }
 
+        public string Status { get; set; }
+        
+        [Required]
+        public decimal TotalPrice { get; set; }
 
     }
 }

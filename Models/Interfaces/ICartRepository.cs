@@ -7,6 +7,7 @@ namespace e_commerce_store.Models.Interfaces
         Task<Cart> GetCartById(int id);
         Task ClearCartItems(int cartId);
 
+        Task<decimal> GetTotalPrice(Cart cart);
         bool Save();
     }
 }
