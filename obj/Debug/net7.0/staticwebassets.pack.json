@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/e-commerce-store.bundle.scp.css"
     },
     {
+      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/Description/iszxyr4q.jpg",
+      "PackagePath": "staticwebassets/Image/Description/iszxyr4q.jpg"
+    },
+    {
+      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/Description/xwogaerp.jpg",
+      "PackagePath": "staticwebassets/Image/Description/xwogaerp.jpg"
+    },
+    {
       "Id": "/home/ismael/e-commerce-store/wwwroot/Image/E77.png",
       "PackagePath": "staticwebassets/Image/E77.png"
     },
@@ -13,8 +21,12 @@
       "PackagePath": "staticwebassets/Image/E775.png"
     },
     {
-      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/n15dk4th.d5e",
-      "PackagePath": "staticwebassets/Image/n15dk4th.d5e"
+      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/ftechqzt.jpg",
+      "PackagePath": "staticwebassets/Image/ftechqzt.jpg"
+    },
+    {
+      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/n15dk4th.png",
+      "PackagePath": "staticwebassets/Image/n15dk4th.png"
     },
     {
       "Id": "/home/ismael/e-commerce-store/wwwroot/Image/phone1.png",

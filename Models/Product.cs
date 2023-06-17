@@ -33,5 +33,7 @@ namespace e_commerce_store.Models
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
 
+        public List<DescriptionImages>? DescriptionImages { get; set; }
+
     }
 }

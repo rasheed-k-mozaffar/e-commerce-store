@@ -7,18 +7,22 @@ using e_commerce_store.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using e_commerce_store.data;
 
+
 namespace e_commerce_store.Controllers
 {
     public class ProductController : Controller
     {
         IProductRepository _productRepository;
         ICategoryRepository _categoryRepository;
+        IDescriptionImagesRepository _descriptionImagesRepository;
+
         private Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
 
-        public ProductController(Microsoft.AspNetCore.Hosting.IHostingEnvironment env,IProductRepository productRepository ,ICategoryRepository categoryRepository){
+        public ProductController(Microsoft.AspNetCore.Hosting.IHostingEnvironment env,IProductRepository productRepository ,ICategoryRepository categoryRepository,IDescriptionImagesRepository descriptionImagesRepository){
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _env = env;
+            _descriptionImagesRepository =descriptionImagesRepository;
         }
 
         [AllowAnonymous]
@@ -65,7 +69,8 @@ namespace e_commerce_store.Controllers
                 TotalProducts = count,
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize),
                 CategoryId = categoryId,
-                Categories = _categoryRepository.GetAll()
+                Categories = _categoryRepository.GetAll(),
+                searchString = searchString
             };
 
             return View(productViewModel);    
@@ -110,18 +115,22 @@ namespace e_commerce_store.Controllers
                 await productVM.File.CopyToAsync(fileStream);
             }
 
-                var product = new Product
-                {
-                    Name = productVM.Name,
-                    Description = productVM.Description,
-                    ImageURL = "/Image/"+fileName,
-                    SKU = productVM.SKU,
-                    Price = productVM.Price,
-                    ReleaseDate = productVM.ReleaseDate,
-                    CategoryId = productVM.CategoryId
-                };
-                _productRepository.Add(product);
-                return RedirectToAction("Index");
+            var product = new Product
+            {
+                Name = productVM.Name,
+                Description = productVM.Description,
+                ImageURL = "/Image/"+fileName,
+                SKU = productVM.SKU,
+                Price = productVM.Price,
+                ReleaseDate = productVM.ReleaseDate,
+                CategoryId = productVM.CategoryId,
+            };
+            _productRepository.Add(product);
+            
+            if(productVM.Files != null)
+                await UploadDescriptionImages(productVM.Files,product.Id);
+            
+            return RedirectToAction("Index");
             }
             else
             {
@@ -131,6 +140,31 @@ namespace e_commerce_store.Controllers
             return Create();//for recreat the categories list and send it again
         }
 
+        private async Task UploadDescriptionImages(List<IFormFile> files , int productId)
+        {
+            long size = files.Sum(f => f.Length);
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var fileName = Path.GetRandomFileName();
+                    // Get the file extension
+                    var extension = Path.GetExtension(formFile.FileName);
+                    // Combine the file name and extension
+                    fileName = Path.ChangeExtension(fileName, extension);
+                    var filePath = Path.Combine(_env.WebRootPath, "Image/Description/"+fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(fileStream);
+                    } 
+                    var image = new DescriptionImages {
+                        ProductId = productId,
+                        URL = "/Image/Description/"+fileName
+                    };
+                    _descriptionImagesRepository.Add(image);
+                }
+            }
+        }
 
         // GET: Movies/Edit/5
         [Authorize(Policy = "RequireAdministratorRole")]

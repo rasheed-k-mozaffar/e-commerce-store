@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using e_commerce_store.data;
 
@@ -10,9 +11,11 @@ using e_commerce_store.data;
 namespace e_commerce_store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230617131441_DescriptionImages")]
+    partial class DescriptionImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -280,6 +283,9 @@ namespace e_commerce_store.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("DescriptionImagesId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
@@ -288,6 +294,8 @@ namespace e_commerce_store.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DescriptionImagesId");
 
                     b.HasIndex("ProductId");
 
@@ -377,6 +385,9 @@ namespace e_commerce_store.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("DescriptionImagesId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageURL")
                         .HasColumnType("TEXT");
@@ -495,8 +506,12 @@ namespace e_commerce_store.Migrations
 
             modelBuilder.Entity("e_commerce_store.Models.DescriptionImages", b =>
                 {
-                    b.HasOne("e_commerce_store.Models.Product", "Product")
+                    b.HasOne("e_commerce_store.Models.Product", null)
                         .WithMany("DescriptionImages")
+                        .HasForeignKey("DescriptionImagesId");
+
+                    b.HasOne("e_commerce_store.Models.Product", "Product")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

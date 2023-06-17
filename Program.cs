@@ -28,6 +28,7 @@ builder.Services.AddScoped<ICartRepository,CartRepository>();
 builder.Services.AddScoped<ICartItemRepository,CartItemRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository,OrderItemRepository>();
+builder.Services.AddScoped<IDescriptionImagesRepository,DescriptionImagesRepository>();
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();

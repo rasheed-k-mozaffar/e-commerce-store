@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fN52VLuw4Lt7yry0oBRJJ0ZV1xGzHqPhEy5J46XOznQ=",
+  "Hash": "Mpbr7TH9Knb1Nv3zM4YMKT/L2NdDtv+Jo/TwEJpezhA=",
   "Source": "e-commerce-store",
   "BasePath": "_content/e-commerce-store",
   "Mode": "Default",
@@ -85,6 +85,40 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
+      "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/Description/iszxyr4q.jpg",
+      "SourceId": "e-commerce-store",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ismael/e-commerce-store/wwwroot/",
+      "BasePath": "_content/e-commerce-store",
+      "RelativePath": "Image/Description/iszxyr4q.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Image/Description/iszxyr4q.jpg"
+    },
+    {
+      "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/Description/xwogaerp.jpg",
+      "SourceId": "e-commerce-store",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ismael/e-commerce-store/wwwroot/",
+      "BasePath": "_content/e-commerce-store",
+      "RelativePath": "Image/Description/xwogaerp.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Image/Description/xwogaerp.jpg"
+    },
+    {
       "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/E77.png",
       "SourceId": "e-commerce-store",
       "SourceType": "Discovered",
@@ -119,12 +153,12 @@
       "OriginalItemSpec": "wwwroot/Image/E775.png"
     },
     {
-      "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/n15dk4th.d5e",
+      "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/ftechqzt.jpg",
       "SourceId": "e-commerce-store",
       "SourceType": "Discovered",
       "ContentRoot": "/home/ismael/e-commerce-store/wwwroot/",
       "BasePath": "_content/e-commerce-store",
-      "RelativePath": "Image/n15dk4th.d5e",
+      "RelativePath": "Image/ftechqzt.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +167,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Image/n15dk4th.d5e"
+      "OriginalItemSpec": "wwwroot/Image/ftechqzt.jpg"
+    },
+    {
+      "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/n15dk4th.png",
+      "SourceId": "e-commerce-store",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ismael/e-commerce-store/wwwroot/",
+      "BasePath": "_content/e-commerce-store",
+      "RelativePath": "Image/n15dk4th.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Image/n15dk4th.png"
     },
     {
       "Identity": "/home/ismael/e-commerce-store/wwwroot/Image/phone1.png",

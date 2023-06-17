@@ -11,5 +11,7 @@ namespace e_commerce_store.ViewModels
         public int TotalPages { get; set; }
         public int TotalProducts { get; set; }
         public int CategoryId { get; set; }
+
+        public string? searchString { get; set; }
     }
 }

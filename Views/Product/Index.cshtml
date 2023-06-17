@@ -13,14 +13,16 @@
     <div class="form-group">
         @Html.LabelFor(m => m.CategoryId, "Category")
         @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
+
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm(Html.BeginForm("Index", "Product", new { page = 1 }, FormMethod.Get)))
 {
     <p>
         Find by name: @Html.TextBox("SearchString")  
-        <input type="submit" value="Search" /></p>
+        <input type="submit" value="Search" />
+    </p>
 }
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
   @foreach (var item in Model.Products) {
@@ -51,19 +53,19 @@
                 @if (Model.Page > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new { page = Model.Page - 1, categoryId = Model.CategoryId})">Previous</a>
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
                     </li>
                 }
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li class="page-item @(i == Model.Page ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("Index", new { page = i, categoryId = Model.CategoryId})">@i</a>
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
                     </li>
                 }
                 @if (Model.Page < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new { page = Model.Page + 1,  categoryId = Model.CategoryId })">Next</a>
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
                     </li>
                 }
             </ul>
