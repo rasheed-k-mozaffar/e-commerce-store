@@ -68,7 +68,7 @@ namespace e_commerce_store.Controllers
                 _cartItemRepository.Add(cartItem);
             }
 
-            // Redirect to the user's cart page
+            // Redirect to the returnUrl (detail page)
             return RedirectToAction("Index");
         }
 
