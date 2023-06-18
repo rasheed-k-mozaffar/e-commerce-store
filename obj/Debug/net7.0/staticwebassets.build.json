@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "I5uoilKuM3U+9KV/vECTCefJAM7EZhSi20hC6Os5RLI=",
+  "Hash": "bXScTslY52D64nWL2175xUratXqWrcaQ/AvUo9daQU4=",
   "Source": "e-commerce-store",
   "BasePath": "_content/e-commerce-store",
   "Mode": "Default",
@@ -119,23 +119,6 @@
       "OriginalItemSpec": "wwwroot/Image/Description/va4xuvig.jpg"
     },
     {
-      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/E77.png",
-      "SourceId": "e-commerce-store",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/ismael/Desktop/e-commerce-store/wwwroot/",
-      "BasePath": "_content/e-commerce-store",
-      "RelativePath": "Image/E77.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Image/E77.png"
-    },
-    {
       "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/E775.png",
       "SourceId": "e-commerce-store",
       "SourceType": "Discovered",
@@ -153,12 +136,12 @@
       "OriginalItemSpec": "wwwroot/Image/E775.png"
     },
     {
-      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/n15dk4th.png",
+      "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/ijftqqbd.png",
       "SourceId": "e-commerce-store",
       "SourceType": "Discovered",
       "ContentRoot": "/home/ismael/Desktop/e-commerce-store/wwwroot/",
       "BasePath": "_content/e-commerce-store",
-      "RelativePath": "Image/n15dk4th.png",
+      "RelativePath": "Image/ijftqqbd.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,7 +150,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Image/n15dk4th.png"
+      "OriginalItemSpec": "wwwroot/Image/ijftqqbd.png"
     },
     {
       "Identity": "/home/ismael/Desktop/e-commerce-store/wwwroot/Image/phone1.png",

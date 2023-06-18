@@ -24,7 +24,8 @@
     </p>
 }
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  @foreach (var item in Model.Products) {
+@if(Model.Products != null){
+    @foreach (var item in Model.Products) {
     <div class="col">
       <div class="bd-placeholder-img card shadow-sm">
         <img class="" src="@item.ImageURL" width="220" height="225" />
@@ -36,11 +37,12 @@
               <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">View</a>
             </div>
             <small class="text-body-secondary">Price:@item.Price</small>
-            <small class="text-body-secondary">Category:@Html.DisplayFor(modelItem => item.Category.Name)</small>
+            <small class="text-body-secondary">Category:@item.Category.Name</small>
           </div>
         </div>
       </div>
     </div>
+}
 }
 </div>
 

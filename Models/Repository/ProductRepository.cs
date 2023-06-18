@@ -76,11 +76,11 @@ namespace e_commerce_store.Models.Repository
 
         public async Task<IEnumerable<Product>> SearchAndSliceAsync(string searchString , int offset, int size)
         {
-            return await _context.Products.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower())).Skip(offset).Take(size).ToListAsync();
+            return await _context.Products.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower())).Include(i => i.Category).Skip(offset).Take(size).ToListAsync();
         }
         public async Task<IEnumerable<Product>> SearchByCategoryAndSliceAsync(string searchString , int categoryId , int offset, int size)
         {
-            return await _context.Products.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower()) && s.CategoryId == categoryId).Skip(offset).Take(size).ToListAsync();
+            return await _context.Products.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower()) && s.CategoryId == categoryId).Include(i => i.Category).Skip(offset).Take(size).ToListAsync();
         }
         public async Task<int> GetCountBySearchAsync(string searchString)
         {

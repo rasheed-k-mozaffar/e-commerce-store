@@ -28,7 +28,7 @@ namespace e_commerce_store.Controllers
 
         [AllowAnonymous]
         [Route("Products")]
-        public async Task<IActionResult> Index(string searchString, int categoryId = -1, int page = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string? searchString, int categoryId = -1, int page = 1, int pageSize = 3)
         {
             if (page < 1 || pageSize < 1 || categoryId < -1 || pageSize > 40)
             {
@@ -257,9 +257,9 @@ namespace e_commerce_store.Controllers
 
 
         [Authorize(Policy = "RequireAdministratorRole")]
-        public async Task Delete(int? id)
+        public async Task Delete(int? productId)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            var product = await _productRepository.GetByIdAsync(productId);
             if (product != null)
             {
                 var oldImagePath = Path.Combine(_env.WebRootPath, product.ImageURL.TrimStart('/'));

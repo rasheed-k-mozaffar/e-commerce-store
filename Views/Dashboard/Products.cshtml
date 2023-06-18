@@ -1,0 +1,114 @@
+@using e_commerce_store.ViewModels
+@model IndexProductViewModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+@using (Html.BeginForm("Products", "Dashboard", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId, "Category")
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+}
+@using (Html.BeginForm(Html.BeginForm("Products", "Dashboard", new { page = 1 }, FormMethod.Get)))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Products != null)
+            {
+                @foreach (var item in Model.Products)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.Price</td>
+                        <td>@item.Category.Name</td>
+                        <td>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a type="button" onclick="deleteProduct('@item.Id')"  class="btn btn-sm btn-outline-secondary">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Products", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Products", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Products", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a type="button" class="btn btn-primary" asp-controller="Product" asp-action="Create">Add</a>
+    </div>
+</div>
+
+
+<script>
+    function deleteProduct(productId) {
+        var params = 'id='+encodeURIComponent(productId);
+        console.log(params);
+        fetch('/Product/Delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        }).then(function (response) {
+            if (response.ok) {
+                var row = document.getElementById('row_'+productId);
+                row.remove();
+            } else {
+                alert('Failed to delete the product.');
+            }
+        }).catch(function (error) {
+            console.error('Error:', error);
+        });
+    }
+</script>
