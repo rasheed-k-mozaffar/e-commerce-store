@@ -7,6 +7,13 @@
     {
       "Id": "/home/ismael/e-commerce-store/wwwroot/Image/Description/tm22slqh.jpg",
       "PackagePath": "staticwebassets/Image/Description/tm22slqh.jpg"
+<<<<<<< HEAD
+=======
+    },
+    {
+      "Id": "/home/ismael/e-commerce-store/wwwroot/Image/Description/vubpn3qa.jpg",
+      "PackagePath": "staticwebassets/Image/Description/vubpn3qa.jpg"
+>>>>>>> b93ced15047852e5d2c5c76f11a8f24894a44561
     },
     {
       "Id": "/home/ismael/e-commerce-store/wwwroot/Image/E77.png",
