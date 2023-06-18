@@ -41,35 +41,31 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int ProductId, int Quantity)
+        public async Task AddToCart(int ProductId, int Quantity)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (user != null)
             {
-                return View("Error");
-            }
-            var cart = await _cartRepository.GetCartByUserId(user.Id);
-            if(cart == null)
-                cart = _cartRepository.MakeCartForUser(user.Id);
+                var cart = await _cartRepository.GetCartByUserId(user.Id);
+                if(cart == null)
+                    cart = _cartRepository.MakeCartForUser(user.Id);
 
-            // Check if the product is already in the cart
-            bool productExists = await _cartItemRepository.isProductExistsOnCartAsync(ProductId,cart.Id);
+                // Check if the product is already in the cart
+                bool productExists = await _cartItemRepository.isProductExistsOnCartAsync(ProductId,cart.Id);
 
-            if (!productExists)
-            {
-                // Create a new cart item and associate it with the cart and product
-                CartItem cartItem = new CartItem
+                if (!productExists)
                 {
-                    CartId = cart.Id,
-                    ProductId = ProductId,
-                    Quantity = Quantity
-                };
+                    // Create a new cart item and associate it with the cart and product
+                    CartItem cartItem = new CartItem
+                    {
+                        CartId = cart.Id,
+                        ProductId = ProductId,
+                        Quantity = Quantity
+                    };
 
-                _cartItemRepository.Add(cartItem);
+                    _cartItemRepository.Add(cartItem);
+                }
             }
-
-            // Redirect to the returnUrl (detail page)
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
