@@ -11,8 +11,10 @@ namespace e_commerce_store.Models.Repository
     public class DescriptionImagesRepository : IDescriptionImagesRepository
     {
         private readonly ApplicationDbContext _context;
-        public DescriptionImagesRepository(ApplicationDbContext context){
+        private readonly IWebHostEnvironment _env;
+        public DescriptionImagesRepository(IWebHostEnvironment env,ApplicationDbContext context){
             _context = context;
+            _env = env;
         }
         public bool Add(DescriptionImages image)
         {
@@ -29,9 +31,10 @@ namespace e_commerce_store.Models.Repository
         {
             var images = _context.DescriptionImages.Where(i => i.ProductId == productId).ToList();
             foreach(var img in images){
-                if (System.IO.File.Exists(img.URL))
+                var imagePath = Path.Combine(_env.WebRootPath, img.URL.TrimStart('/'));
+                if (System.IO.File.Exists(imagePath))
                 {
-                    System.IO.File.Delete(img.URL);
+                    System.IO.File.Delete(imagePath);
                 }
                 _context.Remove(img);
             }

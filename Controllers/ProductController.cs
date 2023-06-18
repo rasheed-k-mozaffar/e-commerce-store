@@ -256,40 +256,22 @@ namespace e_commerce_store.Controllers
         }
 
 
-        // GET: Movies/Delete/5
         [Authorize(Policy = "RequireAdministratorRole")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task Delete(int? id)
         {
-            if (_productRepository.GetAll == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Movies/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Policy = "RequireAdministratorRole")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_productRepository.GetAll == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
-            }
-
             var product = await _productRepository.GetByIdAsync(id);
             if (product != null)
             {
+                var oldImagePath = Path.Combine(_env.WebRootPath, product.ImageURL.TrimStart('/'));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+                _descriptionImagesRepository.ClearProductImages(product.Id);
                 _productRepository.Delete(product);
             }
-            return RedirectToAction(nameof(Index));
         }
+
+
     }
 }
