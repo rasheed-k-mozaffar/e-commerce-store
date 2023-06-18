@@ -6,6 +6,10 @@ namespace e_commerce_store.Models.Interfaces
 
         public bool Remove(DescriptionImages image);
 
+        Task<DescriptionImages> Get(int productId ,string url);
+
+        public bool ClearProductImages(int productId);
+
         public bool Save();
 
     }

@@ -10,7 +10,7 @@ namespace e_commerce_store.ViewModels
     public string SKU { get; set; } 
     public string Description { get; set; }
     public IFormFile File { get; set; }
-    public List<IFormFile> Files {get; set;}
+    public List<IFormFile>? Files {get; set;}
     public decimal Price { get; set; }  
     public DateTime ReleaseDate { get; set; }   
     
