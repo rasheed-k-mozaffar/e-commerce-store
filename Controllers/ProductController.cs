@@ -16,10 +16,10 @@ namespace e_commerce_store.Controllers
         ICategoryRepository _categoryRepository;
         IDescriptionImagesRepository _descriptionImagesRepository;
 
-        private Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+        private IWebHostEnvironment _env;
 
 
-        public ProductController(Microsoft.AspNetCore.Hosting.IHostingEnvironment env,IProductRepository productRepository ,ICategoryRepository categoryRepository,IDescriptionImagesRepository descriptionImagesRepository){
+        public ProductController(IWebHostEnvironment env,IProductRepository productRepository ,ICategoryRepository categoryRepository,IDescriptionImagesRepository descriptionImagesRepository){
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _env = env;

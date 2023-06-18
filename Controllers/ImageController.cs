@@ -7,9 +7,9 @@ namespace e_commerce_store.Controllers
     public class ImageController : Controller
     {
         private readonly IDescriptionImagesRepository _descriptionImagesRepository;
-        private Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+        private IWebHostEnvironment _env;
 
-        public ImageController(IDescriptionImagesRepository descriptionImagesRepository ,  Microsoft.AspNetCore.Hosting.IHostingEnvironment env){
+        public ImageController(IDescriptionImagesRepository descriptionImagesRepository ,  IWebHostEnvironment env){
             _descriptionImagesRepository = descriptionImagesRepository;
             _env = env;
         }
