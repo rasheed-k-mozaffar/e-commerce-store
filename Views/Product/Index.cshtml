@@ -13,7 +13,6 @@
     <div class="form-group">
         @Html.LabelFor(m => m.CategoryId, "Category")
         @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
-
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
 }

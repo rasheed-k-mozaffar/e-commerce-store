@@ -18,6 +18,7 @@ namespace e_commerce_store.Controllers
 
         private Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
 
+
         public ProductController(Microsoft.AspNetCore.Hosting.IHostingEnvironment env,IProductRepository productRepository ,ICategoryRepository categoryRepository,IDescriptionImagesRepository descriptionImagesRepository){
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
@@ -170,50 +171,90 @@ namespace e_commerce_store.Controllers
         [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Edit(int id)
         {
-            if (_productRepository.GetAll == null)
-            {
-                return NotFound();
-            }
-
             var product = await _productRepository.GetByIdAsync(id);
+
             if (product == null)
             {
                 return NotFound();
             }
-            return View(product);
+
+            var categories = _categoryRepository.GetAll();
+
+            var viewModel = new EditProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                SKU = product.SKU,
+                Description = product.Description,
+                Price = product.Price,
+                ReleaseDate = product.ReleaseDate,
+                CategoryId = product.CategoryId,
+                Categories = categories,
+                CurrentImageURL = product.ImageURL,
+                CurrentDescriptionImageURLs = product.DescriptionImages.Select(di => di.URL).ToList()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "RequireAdministratorRole")]
-        public async Task<IActionResult> Edit(int id,Product product)
+        public async Task<IActionResult> Edit(EditProductViewModel productVM)
         {
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var product = await _productRepository.GetByIdAsync(productVM.Id);
+
+                if (product == null)
                 {
-                    _productRepository.Update(product);
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                // Delete old image if a new one is uploaded
+                if (productVM.File != null)
                 {
-                    if (!_productRepository.ProductExist(product.Id))
+                    var oldImagePath = Path.Combine(_env.WebRootPath, product.ImageURL.TrimStart('/'));
+                    if (System.IO.File.Exists(oldImagePath))
                     {
-                        return NotFound();
+                        System.IO.File.Delete(oldImagePath);
                     }
-                    else
+
+                    // Upload new image
+                    var fileName = Path.GetRandomFileName();
+                    var extension = Path.GetExtension(productVM.File.FileName);
+                    fileName = Path.ChangeExtension(fileName, extension);
+                    var filePath = Path.Combine(_env.WebRootPath, "Image", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        throw;
+                        await productVM.File.CopyToAsync(fileStream);
                     }
+
+                    product.ImageURL = "/Image/" + fileName;
                 }
-                return RedirectToAction(nameof(Index));
+
+                product.Name = productVM.Name;
+                product.Description = productVM.Description;
+                product.SKU = productVM.SKU;
+                product.Price = productVM.Price;
+                product.ReleaseDate = productVM.ReleaseDate;
+                product.CategoryId = productVM.CategoryId;
+
+                if(productVM.Files != null)
+                await UploadDescriptionImages(productVM.Files,product.Id);
+
+                _productRepository.Update(product);
+
+                return RedirectToAction("Index");
             }
-            return View(product);
+            else
+            {
+                ModelState.AddModelError("", "Photo upload failed");
+            }
+
+            return View(productVM);
         }
+
 
         // GET: Movies/Delete/5
         [Authorize(Policy = "RequireAdministratorRole")]

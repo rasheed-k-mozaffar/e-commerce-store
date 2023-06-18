@@ -1,0 +1,89 @@
+@model e_commerce_store.ViewModels.EditProductViewModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="CurrentImageURL" value="@Model.CurrentImageURL" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SKU" for="SKU">SKU</label>
+        <input asp-for="SKU" type="text" class="form-control" placeholder="SKU Of Product">
+        <span asp-validation-for="SKU" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" for="Description">Description</label>
+        <input asp-for="Description" type="text" class="form-control" placeholder="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="File">Prdouct Image</label>
+        <input asp-for="File" type="file" class="form-control form-control-lg" placeholder="Image" />
+        <span asp-validation-for="File" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Files">Add Other Images</label>
+        <input asp-for="Files" type="file" class="form-control" multiple class="form-control-file" />
+        <span asp-validation-for="Files" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" for="Price">Price</label>
+        <input asp-for="Price" type="number" class="form-control" placeholder="Price">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReleaseDate">Release Date</label>
+        <input asp-for="ReleaseDate" type="datetime-local" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label"></label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <button asp-page-handler="Upload" type="submit" class="btn btn-primary">Update</button>
+</form>
+    
+<div>
+<label>Current Description Images:</label>
+    @if(Model.CurrentDescriptionImageURLs != null){
+        @foreach (var imageURL in Model.CurrentDescriptionImageURLs)
+        {
+        <div id="imageDiv_@imageURL">
+            <a href="@imageURL" target="_blank">Preview Image</a>
+            <button class="btn btn-danger" onclick="deleteImage('@Model.Id', '@imageURL')">Delete Image</button>
+        </div>
+        }
+    }
+</div>
+
+
+<script>
+    function deleteImage(productId, imageURL) {
+        var params = 'productId=' + encodeURIComponent(productId) + '&imageURL=' + encodeURIComponent(imageURL);
+
+        fetch('/Image/Delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        }).then(function (response) {
+            if (response.ok) {
+                var imageDiv = document.getElementById('imageDiv_' + imageURL);
+                imageDiv.remove();
+            } else {
+                alert('Failed to delete the image.');
+            }
+        }).catch(function (error) {
+            console.error('Error:', error);
+        });
+    }
+</script>
