@@ -1,4 +1,3 @@
-using e_commerce_store.data;
 using e_commerce_store.Models;
 using e_commerce_store.Models.Interfaces;
 using e_commerce_store.ViewModels;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace e_commerce_store.Controllers
 {
-    [Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class DashboardController : Controller
     {
 
@@ -23,7 +22,7 @@ namespace e_commerce_store.Controllers
 
 
         public IActionResult Index(){
-            return View();
+            return RedirectToAction("Products");
         }
 
         public async Task<IActionResult> Products(string? searchString, int categoryId = -1, int page = 1, int pageSize = 3){

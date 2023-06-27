@@ -1,9 +1,10 @@
-using e_commerce_store.Models;
 using e_commerce_store.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace e_commerce_store.Controllers 
 {
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class ImageController : Controller
     {
         private readonly IDescriptionImagesRepository _descriptionImagesRepository;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace e_commerce_store.Controllers
 {
-   [Authorize(Roles = UserRoles.Admin)]
+   [Authorize(Policy = "RequireAdministratorRole")]
     public class OrderController : Controller
     {
         private readonly IOrderRepository _OrderRepository;

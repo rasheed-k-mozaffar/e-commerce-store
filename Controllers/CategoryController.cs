@@ -1,4 +1,3 @@
-using e_commerce_store.data;
 using e_commerce_store.Models;
 using e_commerce_store.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace e_commerce_store.Controllers
 {
-    [Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
