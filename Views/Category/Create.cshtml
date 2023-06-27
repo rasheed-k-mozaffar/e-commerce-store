@@ -1,0 +1,26 @@
+@model e_commerce_store.Models.Category
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<h1>Create Category</h1>
+
+@using (Html.BeginForm("Create", "Category", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+}
+
+
+
+

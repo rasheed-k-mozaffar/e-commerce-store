@@ -18655,6 +18655,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Category/Edit.cshtml",
+      "TargetPath": "Views\\Category\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Product/Edit.cshtml",
       "TargetPath": "Views\\Product\\Edit.cshtml",
       "FileKind": "mvc"
@@ -18687,6 +18692,11 @@
     {
       "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Category/Create.cshtml",
+      "TargetPath": "Views\\Category\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18747,6 +18757,11 @@
     {
       "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Product/Index.cshtml",
       "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ismael/Desktop/e-commerce-store/Views/Dashboard/Categories.cshtml",
+      "TargetPath": "Views\\Dashboard\\Categories.cshtml",
       "FileKind": "mvc"
     },
     {

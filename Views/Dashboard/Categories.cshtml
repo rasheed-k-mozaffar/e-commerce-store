@@ -1,0 +1,100 @@
+@using e_commerce_store.ViewModels
+@model IndexCategoryViewModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+@using (Html.BeginForm(Html.BeginForm("Categories", "Dashboard", new { page = 1 }, FormMethod.Get)))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Categories != null)
+            {
+                @foreach (var item in Model.Categories)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@item.Name</td>
+                        <td>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a type="button" onclick="deleteCategory('@item.Id')"  class="btn btn-sm btn-outline-secondary">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page - 1,pageSize = Model.PageSize })">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString , page = i,  pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page + 1,pageSize = Model.PageSize })">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a type="button" class="btn btn-primary" asp-controller="Category" asp-action="Create">Add</a>
+    </div>
+</div>
+
+
+<script>
+    function deleteCategory(categoryId) {
+        if (confirm('Are you sure you want to delete this category and all its products?')) {
+            var params = 'id=' + encodeURIComponent(categoryId);
+            console.log(params);
+            fetch('/Category/Delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params
+            }).then(function (response) {
+                if (response.ok) {
+                    var row = document.getElementById('row_' + categoryId);
+                    row.remove();
+                } else {
+                    alert('Failed to delete the category.');
+                }
+            }).catch(function (error) {
+                console.error('Error:', error);
+            });
+        }
+    }
+</script>

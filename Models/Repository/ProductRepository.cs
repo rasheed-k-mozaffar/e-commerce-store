@@ -123,6 +123,16 @@ namespace e_commerce_store.Models.Repository
                 return await _context.Products.CountAsync(c => c.CategoryId == categoryID &&  (c.Price <= priceMax && c.Price >= priceMin));
         }
 
+        public async Task<bool> DeleteAllProductByCategoryID(int categoryId)
+        {
+           var products =  await _context.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+           foreach (var item in products)
+           {
+            _context.Remove(item);
+           }
 
+           return Save();
+
+        }
     }
 }

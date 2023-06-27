@@ -8,7 +8,7 @@ namespace e_commerce_store.Models.Repository
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
-        public CategoryRepository(ApplicationDbContext context ){
+        public CategoryRepository(IProductRepository productRepository,ApplicationDbContext context ){
             _context= context;
         }
 
@@ -48,6 +48,26 @@ namespace e_commerce_store.Models.Repository
 
         public bool CategoryExist(int id){
             return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public async Task<IEnumerable<Category>> GetSliceAsync(int offset, int size)
+        {
+            return await _context.Categories.Skip(offset).Take(size).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Category>> SearchAndSliceAsync(string searchString, int offset, int size)
+        {
+            return await _context.Categories.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower())).Skip(offset).Take(size).ToListAsync();
+        }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Categories.AsNoTracking().CountAsync();
+        }
+
+        public async Task<int> GetCountBySearchAsync(string searchString)
+        {
+            return await _context.Categories.AsNoTracking().Where(s => s.Name.ToLower().Contains(searchString.ToLower())).CountAsync();
         }
     }
 }

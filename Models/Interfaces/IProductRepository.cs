@@ -15,6 +15,8 @@ namespace e_commerce_store.Models.Interfaces
 
         bool Delete(Product product);
 
+        Task<bool> DeleteAllProductByCategoryID(int categoryId);
+
         bool ProductExist(int id);
 
         bool Save();

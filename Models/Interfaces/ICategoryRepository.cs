@@ -7,6 +7,10 @@ namespace e_commerce_store.Models.Interfaces
 
         Task<Category?> GetByIdAsync(int? id);
 
+        Task<IEnumerable<Category>> GetSliceAsync(int offset, int size);
+        Task<IEnumerable<Category>>  SearchAndSliceAsync(string searchString , int offset, int size);
+        Task<int> GetCountAsync();
+        Task<int> GetCountBySearchAsync(string searchString);
         bool Add(Category category);
 
         bool Update(Category category);
