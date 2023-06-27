@@ -1,0 +1,79 @@
+@model e_commerce_store.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details</h1>
+
+<table>
+    <tr>
+        <th>Order ID:</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Customer:</th>
+        <td>@Model.AppUser.UserName</td>
+    </tr>
+    <tr>
+        <th>First Name:</th>
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <th>Last Name:</th>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <th>Phone Number: </th>
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <th>Address:</th>
+        <td>@Model.Address</td>
+    </tr>
+    <tr>
+        <th>Address 2:</th>
+        <td>@Model.Address2</td>
+    </tr>
+    <tr>
+        <th>City:</th>
+        <td>@Model.City</td>
+    </tr>
+    <tr>
+        <th>Status:</th>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <th>Total Price:</th>
+        <td>@Model.TotalPrice</td>
+    </tr>
+</table>
+
+<h2>Order Items</h2>
+
+@if (Model.OrderItems != null && Model.OrderItems.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderItem in Model.OrderItems)
+            {
+                <tr>
+                    <td>@orderItem.Product.Name</td>
+                    <td>@orderItem.Quantity</td>
+                    <td>@orderItem.Product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No order items found.</p>
+}

@@ -245,7 +245,7 @@ namespace e_commerce_store.Controllers
 
                 _productRepository.Update(product);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Products", "Dashboard");
             }
             else
             {

@@ -92,7 +92,7 @@
 
 <script>
     function deleteProduct(productId) {
-        var params = 'id='+encodeURIComponent(productId);
+        var params = 'productId='+encodeURIComponent(productId);
         console.log(params);
         fetch('/Product/Delete', {
             method: 'POST',
