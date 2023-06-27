@@ -1,8 +1,99 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using e_commerce_store.ViewModels
+@model IndexProductViewModel
+
+@{
+    ViewData["Title"] = "Products";
+    //Page*PageSize = the Products on this page and + 1 to get number of first item on this page
+    int resultStart = ((Model.Page - 1) * Model.PageSize) + 1;
+    //to ensure that no more results are displayed than there are total products.
+    int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
+}
+@using (Html.BeginForm("Index", "Index", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId, "Category")
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+}
+@using (Html.BeginForm(Html.BeginForm("Index", "Product", new { page = 1 }, FormMethod.Get)))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" />
+    </p>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section id="products">
+@if(Model.Products != null){
+    @foreach (var item in Model.Products) {
+        <div class="product">
+            <div>
+            <img src="@item.ImageURL" alt="@item.Name" width="220" height="225">
+            </div>
+            <h3>@item.Name</h3>
+            <p class="price">@item.Price</p>
+            <button class="cartButton">+ add to cart</button>
+        </div>
+    }
+}
+
+<script src="card.js"></script>
+<div>
+</div>
+</section>
+
+@* <script src="card.js"></script>
+<div>
+</div>
+</section>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+@if(Model.Products != null){
+    @foreach (var item in Model.Products) {
+    <div class="col">
+      <div class="bd-placeholder-img card shadow-sm">
+        <img class="" src="@item.ImageURL" width="220" height="225" />
+        <div class="card-body">
+          <p class="card-text">@item.Name</p>
+          <p class="card-text">@item.Description</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">View</a>
+            </div>
+            <small class="text-body-secondary">Price:@item.Price</small>
+            <small class="text-body-secondary">Category:@item.Category.Name</small>
+          </div>
+        </div>
+      </div>
+    </div>
+}
+}
+</div> *@
+
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
 </div>

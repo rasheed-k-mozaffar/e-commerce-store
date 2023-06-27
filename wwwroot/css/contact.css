@@ -1,0 +1,24 @@
+/* contact */
+.contactForm
+{
+    padding: 20px;
+}
+
+.contactForm input,
+.contactForm textarea,
+.contactForm button
+{
+    background-color: white;
+    color: #c57d1e;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: solid 2px #c57d1e;
+    border-radius: 5px;
+}
+::placeholder
+{
+    color: #dcb480;
+}
+

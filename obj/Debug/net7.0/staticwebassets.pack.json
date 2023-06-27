@@ -29,12 +29,32 @@
       "PackagePath": "staticwebassets/Image/vb0vjccj.jpg"
     },
     {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/css/contact.css",
+      "PackagePath": "staticwebassets/css/contact.css"
+    },
+    {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/css/products.css",
+      "PackagePath": "staticwebassets/css/products.css"
+    },
+    {
       "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/css/style.css",
+      "PackagePath": "staticwebassets/css/style.css"
+    },
+    {
       "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
+    },
+    {
+      "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/js/navBar.js",
+      "PackagePath": "staticwebassets/js/navBar.js"
     },
     {
       "Id": "/home/ismael/Desktop/e-commerce-store/wwwroot/js/site.js",
