@@ -1,6 +1,7 @@
 # ASP.NET and Visual Studio files
 obj/
 bin/
+publish/
 *.user
 *.vs
 

@@ -65,7 +65,8 @@ namespace e_commerce_store.data
                 {
                     var newAdminUser = new AppUser()
                     {
-                        UserName = "Ismael",
+                        Name = "Admin",
+                        UserName = "Admin",
                         Email = adminUserEmail,
                         EmailConfirmed = true,
                     };
@@ -80,6 +81,7 @@ namespace e_commerce_store.data
                 {
                     var newAppUser = new AppUser()
                     {
+                        Name = "User", 
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,
