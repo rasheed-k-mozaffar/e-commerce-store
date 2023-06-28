@@ -1,4 +1,3 @@
-# ASP.NET and Visual Studio files
 obj/
 bin/
 publish/
@@ -22,4 +21,3 @@ packages/
 
 # IDE-specific files
 .vscode/
-.idea/
