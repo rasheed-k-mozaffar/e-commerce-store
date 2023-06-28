@@ -7,20 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-// if (builder.Environment.IsDevelopment())
-// {
-//     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//         options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
-// }
-// else
-// {
-//     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//         options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionApplicationDbContext")));
-// }
+    options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -8,7 +8,7 @@
     //to ensure that no more results are displayed than there are total products.
     int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
 }
-@using (Html.BeginForm("Index", "Index", FormMethod.Get))
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.CategoryId, "Category")
@@ -16,37 +16,13 @@
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
 }
-@using (Html.BeginForm(Html.BeginForm("Index", "Product", new { page = 1 }, FormMethod.Get)))
+@using (Html.BeginForm(Html.BeginForm("Index", "Home", new { page = 1 }, FormMethod.Get)))
 {
     <p>
         Find by name: @Html.TextBox("SearchString")  
         <input type="submit" value="Search" />
     </p>
 }
-
-<section id="products">
-@if(Model.Products != null){
-    @foreach (var item in Model.Products) {
-        <div class="product">
-            <div>
-            <img src="@item.ImageURL" alt="@item.Name" width="220" height="225">
-            </div>
-            <h3>@item.Name</h3>
-            <p class="price">@item.Price</p>
-            <button class="cartButton">+ add to cart</button>
-        </div>
-    }
-}
-
-<script src="card.js"></script>
-<div>
-</div>
-</section>
-
-@* <script src="card.js"></script>
-<div>
-</div>
-</section>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 @if(Model.Products != null){
     @foreach (var item in Model.Products) {
@@ -58,7 +34,7 @@
           <p class="card-text">@item.Description</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">View</a>
+              <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">View</a>
             </div>
             <small class="text-body-secondary">Price:@item.Price</small>
             <small class="text-body-secondary">Category:@item.Category.Name</small>
@@ -68,7 +44,7 @@
     </div>
 }
 }
-</div> *@
+</div>
 
 
 <div class="row">

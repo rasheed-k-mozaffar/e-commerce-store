@@ -45,7 +45,7 @@ namespace e_commerce_store.Controllers
             if (ModelState.IsValid)
             {
                 _categoryRepository.Update(category);
-                return RedirectToAction("Orders", "Dashboard");
+                return RedirectToAction("Categories", "Dashboard");
             }
             else
             {

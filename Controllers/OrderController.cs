@@ -24,38 +24,6 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToOrder(int ProductId, int Quantity)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var Order = await _OrderRepository.GetOrderByUserId(user.Id);
-            if(Order == null)
-                Order = _OrderRepository.MakeOrderForUser(user.Id);
-
-            // Check if the product is already in the Order
-            bool productExists = await _OrderItemRepository.isProductExistsOnOrderAsync(ProductId,Order.Id);
-
-            if (!productExists)
-            {
-                // Create a new Order item and associate it with the Order and product
-                OrderItem OrderItem = new OrderItem
-                {
-                    OrderId = Order.Id,
-                    ProductId = ProductId,
-                    Quantity = Quantity
-                };
-
-                _OrderItemRepository.Add(OrderItem);
-            }
-
-            // Redirect to the user's Order page
-            return RedirectToAction("Edit");
-        }
-
-        [HttpPost]
         public async Task<IActionResult> RemoveFromOrder(int OrderItemId)
         {
             // Find the Order item in the database

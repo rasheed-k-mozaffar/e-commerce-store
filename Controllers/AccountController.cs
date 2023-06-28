@@ -44,7 +44,7 @@ namespace e_commerce_store.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, true, true);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Product");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 //Password is incorrect
@@ -94,14 +94,14 @@ namespace e_commerce_store.Controllers
                 return View(registerViewModel);
             }
             
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
