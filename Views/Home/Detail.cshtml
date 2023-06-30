@@ -1,0 +1,166 @@
+@model Product
+@{
+    Layout = null;
+    ViewData["Title"] = Model.Name;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+    <link rel="stylesheet" href="~/css/shared-style.css">
+    <link rel="stylesheet" href="~/css/detail.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- nav bar here -->
+    <header>
+      <div class="logo">Lambda Store</div>
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav>
+        <ul>
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            @if(User.Identity.IsAuthenticated && User.IsInRole("admin")){
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
+            }
+            @if(User.Identity.IsAuthenticated){
+                <li>
+                <a asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            }else{
+                <li>
+                <a asp-area="" asp-controller="Account" asp-action="Login">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                </li>
+            }
+        </ul>
+      </nav>
+    </header>
+    <script>
+        hamburger = document.querySelector(".hamburger");
+        hamburger.onclick = function(){
+        navBar = document.querySelector("nav");
+        navBar.classList.toggle("checked");
+        }
+    </script> 
+
+    <!------------------>
+    <div id="details-container">
+        <div id="left-screen">
+            <div class="img-container">
+                <button id="previous-img"><i class='bx bxs-chevron-left-circle'></i></button>
+                <img src="@Model.ImageURL" alt="" id="main-image">
+                <button id="next-img"><i class='bx bxs-chevron-right-circle'></i></button>
+            </div>
+            <div id="images">
+                <img src="@Model.ImageURL" alt="" id="selected">
+                @if (Model.DescriptionImages != null)
+                  @foreach (var item in Model.DescriptionImages){
+                    <img src="@item.URL" alt="">
+                  }
+            </div>
+            <script>
+                let container = document.getElementById('images');
+                let imgs = container.getElementsByTagName('img');
+                let main_image = document.getElementById('main-image');
+                main_image.src = document.getElementById('selected').src;
+                for(let i = 0; i < imgs.length; i++){
+                    imgs[i].onclick = function(){
+                        for(let j = 0;j<imgs.length;j++){
+                            imgs[j].id = "";
+                        }
+                        imgs[i].id = "selected";
+                        main_image.src = imgs[i].src;
+                    }
+                }
+                let next = document.getElementById('next-img');
+                let previous = document.getElementById('previous-img');
+                next.onclick= function(){
+                    let slt = document.getElementById('selected');
+                    slt.nextElementSibling.id = 'selected';
+                    slt.id = '';
+                    main_image.src = document.getElementById('selected').src;
+                }
+                previous.onclick = function(){
+                    let slt = document.getElementById('selected');
+                    slt.previousElementSibling.id = 'selected';
+                    slt.id = '';
+                    main_image.src = document.getElementById('selected').src;
+                }
+            </script>
+        </div>
+        <div id="right-screen">
+            <h2>@Model.Name</h2>
+            <h3>Details :</h3>
+            <p>@Model.Description</p>
+            <h4><span class="colored">Release date : </span>@Model.ReleaseDate</h4>
+            <h4><span class="colored">SKU : </span>@Model.SKU</h3>
+            <h3 id="price">@Model.Price S.P</h3>
+            <div>
+                <label for="quantity">quantity : </label>
+                <input type="number" id="quantity" max="100" min="1" value="1"/>
+            </div>
+            <h3 id="total-price">Total price : </h3>
+            <button id='addToCart' onclick="addToCart('@Model.Id')">Add to Cart</button>
+        </div>
+    </div>
+    <script>
+        let detcon = document.getElementById('details-container');
+        if(innerWidth > 768 && document.getElementById('left-screen').offsetHeight >= innerHeight)
+            detcon.style.height = document.getElementById('left-screen').offsetHeight + 20 + 'px';
+        onresize = function(){
+            if(innerWidth > 768 && document.getElementById('left-screen').offsetHeight >= innerHeight)
+                detcon.style.height = document.getElementById('left-screen').offsetHeight + 20 + 'px';
+        }
+        let pricetxt = document.getElementById('price').textContent;
+        let price = parseFloat(pricetxt.slice(0,-3));
+        let total = document.getElementById('total-price');
+        let quantity = document.getElementById('quantity');
+        let quantval = Number(quantity.value);
+        total.textContent = 'Total price : ' + String(price*quantval);
+        quantity.onchange = function(){
+            quantval = Number(quantity.value);
+            total.textContent = 'Total price : ' + String(price*quantval);
+        }
+
+        function addToCart(productId) {
+            var params = 'ProductId=' + encodeURIComponent(productId) + '&Quantity=' + encodeURIComponent(document.getElementById('quantity').value);
+            fetch('/Cart/AddToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params
+            }).then(function (response) {
+                if (response.ok) {
+                    var addToCartButton = document.getElementById('addToCart');
+                    addToCartButton.textContent = 'Added';
+                    addToCartButton.disabled = true; // Optional: Disable the button after it's added
+                } else {
+                    alert('Failed to add to cart.');
+                }
+            }).catch(function (error) {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+

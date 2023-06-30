@@ -20,6 +20,7 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpGet]
+        [Route("Login")]
         public IActionResult Login()
         {
             var response = new LoginViewModel();
@@ -27,6 +28,7 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
+        [Route("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel){
             if (!ModelState.IsValid) return View(loginViewModel);
 
@@ -59,6 +61,7 @@ namespace e_commerce_store.Controllers
 
 
         [HttpGet]
+        [Route("Register")]
         public IActionResult Register()
         {
             var response = new RegisterViewModel();
@@ -66,6 +69,7 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
+        [Route("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (!ModelState.IsValid) return View(registerViewModel);
@@ -98,6 +102,7 @@ namespace e_commerce_store.Controllers
         }
 
         [HttpPost]
+        [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

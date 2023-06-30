@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/shared-style.css">
+    <link rel="stylesheet" href="~/css/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+      <div class="logo">Lambda Store</div>
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav>
+        <ul>
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            @if(User.Identity.IsAuthenticated && User.IsInRole("admin")){
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
+            }
+            @if(User.Identity.IsAuthenticated){
+                <li>
+                <a asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            }else{
+                <li>
+                <a asp-area="" asp-controller="Account" asp-action="Login">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                </li>
+            }
+        </ul>
+      </nav>
+    </header>
+    <script>
+        hamburger = document.querySelector(".hamburger");
+        hamburger.onclick = function(){
+        navBar = document.querySelector("nav");
+        navBar.classList.toggle("checked");
+        }
+    </script>   
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+</body>
+</html>

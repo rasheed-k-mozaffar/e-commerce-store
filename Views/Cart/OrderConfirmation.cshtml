@@ -1,5 +1,21 @@
 @{
-    ViewData["Title"] = "Order Confirmation";
+    Layout = null;
 }
 
-<h1>your order succeeded</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/order-suceed.css"/>
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <h1>your order succeeded</h1>
+            <a asp-controller="Home" asp-action="Index">go back to home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 // Add services to the container.
@@ -22,6 +22,7 @@ builder.Services.AddScoped<ICartItemRepository,CartItemRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository,OrderItemRepository>();
 builder.Services.AddScoped<IDescriptionImagesRepository,DescriptionImagesRepository>();
+
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();

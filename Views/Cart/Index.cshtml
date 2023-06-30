@@ -1,46 +1,105 @@
 @model Cart
 @{
-    ViewData["Title"] = "Cart";
+    Layout = null;
 }
-
-<h2>Your Cart</h2>
-
-@if (@Model.CartItems != null && @Model.CartItems.Any())
-{
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cartItem in @Model.CartItems)
-            {
-                <tr>
-                    <td>@cartItem.Product.Name</td>
-                    <td>@cartItem.Quantity</td>
-                    <td>@cartItem.Product.Price</td>
-                    <td>
-                        <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
-                            <input type="hidden" name="CartItemId" value="@cartItem.Id" />
-                            <button type="submit">Remove From Cart</button>
-                        </form>
-                    </td>
-                </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Cart</title>
+    <link rel="stylesheet" href="~/css/shared.css" />
+</head>
+<body>
+    <header>
+      <div class="logo">Lambda Store</div>
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav>
+        <ul>
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            @if(User.Identity.IsAuthenticated && User.IsInRole("admin")){
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
             }
-            <form method="post" asp-controller="Cart" asp-action="ClearCart">
-                <input type="hidden" name="CartId" value="@Model.Id" />
-                <button type="submit">Clear Cart Items</button>
-            </form>
-        </tbody>
-    </table>
+            @if(User.Identity.IsAuthenticated){
+                <li>
+                <a asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            }else{
+                <li>
+                <a asp-area="" asp-controller="Account" asp-action="Login">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                </li>
+            }
+        </ul>
+      </nav>
+    </header>
+    <script>
+        hamburger = document.querySelector(".hamburger");
+        hamburger.onclick = function(){
+        navBar = document.querySelector("nav");
+        navBar.classList.toggle("checked");
+        }
+    </script>  
+    @if (@Model.CartItems != null && @Model.CartItems.Any())
+    {
+    <h2>Your Cart</h2>
+    <div class="content">
+        <div class="table-responsive">
+        <table  class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cartItem in @Model.CartItems)
+                {
+                    <tr>
+                        <td>@cartItem.Product.Name</td>
+                        <td>@cartItem.Quantity</td>
+                        <td>@(@cartItem.Product.Price * @cartItem.Quantity)</td>
+                        <td>
+                            <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
+                                <input type="hidden" name="CartItemId" value="@cartItem.Id" />
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">Remove From Cart</button>
+                            </form>             
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+        <form method="post" asp-controller="Cart" asp-action="ClearCart">
+        <input type="hidden" name="CartId" value="@Model.Id" />
+        <button calss="clear-btn" type="submit">Clear Cart Items</button>
+        </form>
+        <div class="col-md-12">
+            <a type="button" class="btn btn-primary" href="@Url.Action("CheckOut", "Cart")" class="btn btn-primary">Go to Checkout</a>
+        </div>
+    </div>
 
-    <a href="@Url.Action("CheckOut", "Cart")" class="btn btn-primary">Go to Checkout</a>
-
-}
-else
-{
-    <p>Your cart is empty.</p>
-}
+    }
+    else
+    {
+        <div class="content"><h1 class="cartEmpty">Your cart is empty.</h1></div>
+    }
+</body>
+</html>

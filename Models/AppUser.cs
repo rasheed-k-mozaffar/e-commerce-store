@@ -8,3 +8,4 @@ namespace e_commerce_store.Models
         [Required]
         public string Name { get; set; }   }
 }
+

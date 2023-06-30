@@ -1,0 +1,144 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background: url(../Image/background.jpg);
+    background-size: cover;
+    font-size: 16px;
+}
+
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 80vh;
+}  
+
+.wrapper{
+    width: 420px;
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #000000a8;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    /* box-shadow: 40px 5px 10000px black; */
+    margin: 0 20px;
+}
+
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    padding: 10px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 16px;
+}
+
+.input-box input::placeholder{
+    color: white;
+    font-size: 16px;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input{
+    accent-color: white;
+}
+
+.remember-forgot a{
+    color: white;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+
+.wrapper .btn{
+    font-size: 16px;
+    font-weight: 600;
+    width: 70%;
+    height: 40px;
+    margin: auto 15%;
+    background: white;
+    color: #c57d1e;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.register-link{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link p a{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover{
+    text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent; /* Background color of the track */
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white; /* Color of the thumb */
+    border-radius: 50px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.text-danger{
+    font-size : 15px;
+    color: #ffad00;
+    margin : 40px;
+}

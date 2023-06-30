@@ -1,0 +1,30 @@
+body {
+    background: #c57d1e;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 80vh;
+}
+
+.wrapper {
+    max-width: 420px;
+    max-height: 75vh;
+    background: #0000005f;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    /* box-shadow: 40px 5px 10000px black; */
+    margin: 0 20px;
+    text-align: center;
+}
+
+    .wrapper a {
+        color: white;
+        text-decoration: none;
+        font-size: large;
+    }

@@ -18,7 +18,7 @@ public class HomeController : Controller
         _categoryRepository = categoryRepository;
     }
 
-        public async Task<IActionResult> Index(string? searchString, int categoryId = -1, int page = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string? searchString, int categoryId = -1, int page = 1, int pageSize = 10)
         {
             if (page < 1 || pageSize < 1 || categoryId < -1 || pageSize > 40)
             {

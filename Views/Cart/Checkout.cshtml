@@ -1,75 +1,81 @@
 @model e_commerce_store.ViewModels.CheckOutViewModel
 @{
+    Layout = "_LoginLayout";
     ViewData["Title"] = "Checkout";
 }
 
-<h2>Checkout</h2>
+<div class="container">
+    <div class="wrapper">
+        <form asp-action="Checkout" asp-controller="Cart">
+            <h1>Checkout</h1>
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="UserName" type="text" placeholder="username" required readonly>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.UserName)
+            </div>
 
-@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="UserEmail" type="email" placeholder="email" required readonly>
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.UserEmail)
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName)
-        @Html.DisplayFor(model => model.UserName)
-        @Html.HiddenFor(model => model.UserName)
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="PhoneNumber" type="tel" placeholder="phone number" required>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="FirstName" type="text" placeholder="first name" required>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="LastName" type="text" placeholder="last name" required>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="City" type="text" placeholder="city" required>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="Address1" type="text" placeholder="address line 1" required>
+                    <span asp-validation-for="Address1" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="Address2" type="text" placeholder="address line 2">
+                    <span asp-validation-for="Address2" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box">
+                    <input asp-for="TotalPrice" type="text" placeholder="toatlPrice" required readonly>
+                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.TotalPrice)
+            </div>
+
+            <button type="submit" class="btn">Place Order</button>
+        </form>
     </div>
+</div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserEmail)
-        @Html.DisplayFor(model => model.UserEmail)
-        @Html.HiddenFor(model => model.UserEmail)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber)
-        @Html.TextBoxFor(model => model.PhoneNumber)
-        @Html.ValidationMessageFor(model => model.PhoneNumber)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName)
-        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.FirstName)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName)
-        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.LastName)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.City)
-        @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.City)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address1)
-        @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Address1)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address2)
-        @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Address2)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TotalPrice)
-        @Html.DisplayFor(model => model.TotalPrice)
-        @Html.HiddenFor(model => model.TotalPrice)
-    </div>
-
-
-    <button type="submit" class="btn btn-primary">Place Order</button>
-}
-
-<style>
-    .field-validation-error {
-        color: red;
-        font-size: 14px;
-    }
-</style>

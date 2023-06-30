@@ -1,0 +1,141 @@
+#details-container{
+    display: flex;
+    padding: 20px 20px 0;
+    max-width: fit-content;
+    height: 90vh;
+}
+
+#left-screen ,
+#right-screen{
+    width: 50%;
+    padding: 20px 30px;
+}
+
+#left-screen{
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+}
+
+#right-screen{
+    background-color: white;
+    border-top-left-radius: 30px;
+    line-height: 45px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    min-height:90hv;
+}
+
+#right-screen h2 ,
+#right-screen h3 ,
+.colored {
+    color: #c57d1e;
+}
+
+.img-container{
+    display: flex;
+    justify-content:center ;
+    justify-content: space-around;
+    min-height: 60%;
+}
+
+#main-image{
+    width: 60%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+button{
+    width: 80%;
+    min-height: 40px;
+    margin: 5px 10%;
+    background: #c57d1e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover{
+    background: #815214;
+    cursor: pointer;
+}
+
+.img-container button{
+    margin:auto 20px;
+    height: auto;
+    min-height: 100px;
+    width: 40px;
+    font-size: 30px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    color: #c57d1e;
+}
+
+.img-container button:hover{
+    background: #dcb480;
+}
+
+#images{
+    padding: 20px 10px;
+    align-content:space-around;
+}
+
+#images img{
+    max-height: 100px;
+    max-width: 100px;
+    margin: 5px 5px;
+    border-radius: 5px;
+}
+
+#selected{
+    border:2px solid #c57d1e;
+}
+
+#quantity{
+    border: none;
+    outline: none;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#right-screen::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+  
+#right-screen::-webkit-scrollbar-track {
+    background: transparent; /* Background color of the track */
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+#right-screen::-webkit-scrollbar-thumb {
+    background: #c57d1e; /* Color of the thumb */
+    border-radius: 50px;
+}
+
+@media (max-width:768px){
+    #details-container {
+        display: block;
+        padding: 10px 0 0;
+    }
+
+    #left-screen,
+    #right-screen{
+        width: 100%;
+        padding: 10px 10xp 0;
+    }
+    #main-image{
+        height: 300px;
+        width: 300px;
+    }
+    #images img{
+        max-height: 80px;
+        max-width: 80px;
+    }
+}

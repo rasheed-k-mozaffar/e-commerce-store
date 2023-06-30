@@ -25,7 +25,7 @@ namespace e_commerce_store.Controllers
             return RedirectToAction("Products");
         }
 
-        public async Task<IActionResult> Products(string? searchString, int categoryId = -1, int page = 1, int pageSize = 3){
+        public async Task<IActionResult> Products(string? searchString, int categoryId = -1, int page = 1, int pageSize = 10){
             if (page < 1 || pageSize < 1 || categoryId < -1 || pageSize > 40)
             {
                 return NotFound();
@@ -73,7 +73,7 @@ namespace e_commerce_store.Controllers
             return View(productViewModel);    
         }//End of product view
 
-        public async Task<IActionResult> Orders(string? searchString , int page = 1, int pageSize = 3){
+        public async Task<IActionResult> Orders(string? searchString , int page = 1, int pageSize = 10){
             if (page < 1 || pageSize < 1  || pageSize > 40)
             {
                 return NotFound();
@@ -102,7 +102,7 @@ namespace e_commerce_store.Controllers
             return View(OrderViewModel);         
         }//End of order view model
         
-        public async Task<IActionResult> Categories(string? searchString , int page = 1, int pageSize = 3){
+        public async Task<IActionResult> Categories(string? searchString , int page = 1, int pageSize = 10){
             if (page < 1 || pageSize < 1  || pageSize > 40)
             {
                 return NotFound();

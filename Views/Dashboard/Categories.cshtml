@@ -2,76 +2,85 @@
 @model IndexCategoryViewModel
 
 @{
+    Layout = "_DashboardLayout";
     ViewData["Title"] = "Categories";
 }
 
-@using (Html.BeginForm(Html.BeginForm("Categories", "Dashboard", new { page = 1 }, FormMethod.Get)))
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString")  
-        <input type="submit" value="Search" />
-    </p>
-}
-
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Categories != null)
-            {
-                @foreach (var item in Model.Categories)
-                {
-                    <tr id="row_@item.Id">
-                        <td>@item.Name</td>
-                        <td>
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a type="button" onclick="deleteCategory('@item.Id')"  class="btn btn-sm btn-outline-secondary">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+<div class="top-filter">
+    <div class="filter-container">
+        <form asp-action="Categories" asp-controller="Dashboard" method="get">
+            <div class="from-group">
+                <label>Find by name: </label>
+                <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
+                <input type="submit" value="Search" class="filter-btn" />
+                <input type="hidden" name="page" value="1" />
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
+            </div>
+        </form>
+    </div>
 </div>
 
-<div class="row">
+<div class="content">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Categories != null)
+                    {
+                        @foreach (var item in Model.Categories)
+                        {
+                            <tr id="row_@item.Id">
+                                <td>@item.Name</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a type="button" onclick="deleteCategory('@item.Id')"  class="btn btn-sm btn-outline-secondary">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     <div class="col-md-12">
-        <nav aria-label="Page navigation example">
+        <a type="button" class="btn btn-primary" asp-controller="Category" asp-action="Create">Add</a>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-12">
+        <div aria-label="Page navigation example" class="bottom">
             <ul class="pagination">
                 @if (Model.Page > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page - 1,pageSize = Model.PageSize })">Previous</a>
+                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page - 1 ,pageSize = Model.PageSize })">Previous</a>
                     </li>
                 }
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
-                    <li class="page-item @(i == Model.Page ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString , page = i,  pageSize = Model.PageSize })">@i</a>
+                    <li class="page-item">
+                        <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Categories", new {searchString = Model.searchString , page = i, pageSize = Model.PageSize })">@i</a>
                     </li>
                 }
                 @if (Model.Page < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page + 1,pageSize = Model.PageSize })">Next</a>
+                        <a class="page-link" href="@Url.Action("Categories", new {searchString = Model.searchString, page = Model.Page + 1 ,pageSize = Model.PageSize })">Next</a>
                     </li>
                 }
             </ul>
-        </nav>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <a type="button" class="btn btn-primary" asp-controller="Category" asp-action="Create">Add</a>
-    </div>
-</div>
+
 
 
 <script>

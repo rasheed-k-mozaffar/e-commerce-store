@@ -2,27 +2,40 @@
 @model IndexProductViewModel
 
 @{
+    Layout = "_DashboardLayout";
     ViewData["Title"] = "Products";
 }
 
-@using (Html.BeginForm("Products", "Dashboard", FormMethod.Get))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.CategoryId, "Category")
-        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "All Categories", new { @class = "form-control" })
-    </div>
-    <button type="submit" class="btn btn-primary">Filter</button>
-}
-@using (Html.BeginForm(Html.BeginForm("Products", "Dashboard", new { page = 1 }, FormMethod.Get)))
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString")  
-        <input type="submit" value="Search" />
-    </p>
-}
+<div class="top-filter">
+    <div class="filter-container">
+        <form asp-action="Products" asp-controller="Dashboard" method="get">
+            <div class="form-group">
+                <label for="CategoryId">Category</label>
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                <input type="hidden" name="SearchString" value="@Model.searchString" />
+                <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control category">
+                    <option value="-1">All Categories</option>
+                </select>
+                <button type="submit" class="btn btn-primary filter-btn">Filter</button>
+            </div>
+        </form>
 
-<div class="table-responsive">
-    <table class="table">
+        <form asp-action="Products" asp-controller="Dashboard" method="get">
+            <div class="from-group">
+                <label>Find by name: </label>
+                <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
+                <input type="submit" value="Search" class="filter-btn" />
+                <input type="hidden" name="page" value="1" />
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <div class="table-responsive">
+        <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -44,7 +57,7 @@
                         <td>@item.Category.Name</td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">View</a>
                                 <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                 <a type="button" onclick="deleteProduct('@item.Id')"  class="btn btn-sm btn-outline-secondary">Delete</a>
                             </div>
@@ -54,11 +67,15 @@
             }
         </tbody>
     </table>
+    </div>
+    <div class="col-md-12">
+        <a type="button" class="btn btn-primary" asp-controller="Product" asp-action="Create">Add</a>
+    </div>
 </div>
 
-<div class="row">
+<div>
     <div class="col-md-12">
-        <nav aria-label="Page navigation example">
+        <div aria-label="Page navigation example" class="bottom">
             <ul class="pagination">
                 @if (Model.Page > 1)
                 {
@@ -68,8 +85,8 @@
                 }
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
-                    <li class="page-item @(i == Model.Page ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("Products", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
+                    <li class="page-item">
+                        <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Products", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
                     </li>
                 }
                 @if (Model.Page < Model.TotalPages)
@@ -79,36 +96,29 @@
                     </li>
                 }
             </ul>
-        </nav>
+        </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <a type="button" class="btn btn-primary" asp-controller="Product" asp-action="Create">Add</a>
-    </div>
-</div>
-
 
 <script>
-    function deleteProduct(productId) {
-        var params = 'productId='+encodeURIComponent(productId);
-        console.log(params);
-        fetch('/Product/Delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: params
-        }).then(function (response) {
-            if (response.ok) {
-                var row = document.getElementById('row_'+productId);
-                row.remove();
-            } else {
-                alert('Failed to delete the product.');
-            }
-        }).catch(function (error) {
-            console.error('Error:', error);
-        });
-    }
+function deleteProduct(productId) {
+    var params = 'productId='+encodeURIComponent(productId);
+    console.log(params);
+    fetch('/Product/Delete', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params
+    }).then(function (response) {
+        if (response.ok) {
+            var row = document.getElementById('row_'+productId);
+            row.remove();
+        } else {
+            alert('Failed to delete the product.');
+        }
+    }).catch(function (error) {
+        console.error('Error:', error);
+    });
+}
 </script>
