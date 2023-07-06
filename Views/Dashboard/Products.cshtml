@@ -40,6 +40,7 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th>ReleaseDate</th>
                 <th>Price</th>
                 <th>Category</th>
                 <th>Actions</th>
@@ -50,9 +51,19 @@
             {
                 @foreach (var item in Model.Products)
                 {
-                    <tr id="row_@item.Id">
+                    <tr id="row_@item.Id">  
                         <td>@item.Name</td>
-                        <td>@item.Description</td>
+                        <td>    
+                            @if (@item.Description.Length > 80)
+                            {
+                                @(@item.Description.Substring(0, 80) + "...")
+                            }
+                            else
+                            {
+                                @item.Description
+                            }
+                        </td>
+                        <td>@item.ReleaseDate</td>
                         <td>@item.Price</td>
                         <td>@item.Category.Name</td>
                         <td>

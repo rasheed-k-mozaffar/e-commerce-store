@@ -9,15 +9,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>details</title>
     <link rel="stylesheet" href="~/css/shared-style.css">
     <link rel="stylesheet" href="~/css/detail.css">
+    <title>@Model.Name</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <!-- nav bar here -->
     <header>
-      <div class="logo">Lambda Store</div>
+      <a asp-controller="Home" asp-action="Index">
+        <div class="logo">Lambda Store</div>
+      </a>
       <div class="hamburger">
         <div></div>
         <div></div>
@@ -110,7 +112,8 @@
             <h2>@Model.Name</h2>
             <h3>Details :</h3>
             <p>@Model.Description</p>
-            <h4><span class="colored">Release date : </span>@Model.ReleaseDate</h4>
+            Copy
+            <h4><span class="colored">Release date: </span>@Model.ReleaseDate.ToString("yyyy")</h4>
             <h4><span class="colored">SKU : </span>@Model.SKU</h3>
             <h3 id="price">@Model.Price S.P</h3>
             <div>
@@ -122,6 +125,7 @@
         </div>
     </div>
     <script>
+
         let detcon = document.getElementById('details-container');
         if(innerWidth > 768 && document.getElementById('left-screen').offsetHeight >= innerHeight)
             detcon.style.height = document.getElementById('left-screen').offsetHeight + 20 + 'px';
@@ -149,12 +153,12 @@
                 },
                 body: params
             }).then(function (response) {
-                if (response.ok) {
+                if (response.ok &&  response.url.includes('Login') == false) {
                     var addToCartButton = document.getElementById('addToCart');
                     addToCartButton.textContent = 'Added';
                     addToCartButton.disabled = true; // Optional: Disable the button after it's added
                 } else {
-                    alert('Failed to add to cart.');
+                    alert('Login to use cart');
                 }
             }).catch(function (error) {
                 console.error('Error:', error);

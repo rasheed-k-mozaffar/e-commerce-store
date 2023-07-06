@@ -1,0 +1,19 @@
+body {
+    background-color: antiquewhite;
+    margin: 60px;
+}
+
+label {
+    padding : 10px;
+
+}
+
+button , .btn {
+    width:150px;
+    height: 30px;
+    margin: 10px 0;
+    background: #c57d1e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using e_commerce_store.data;
 using e_commerce_store.Models;
 using e_commerce_store.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace e_commerce_store.Controllers
 {
@@ -90,19 +90,26 @@ namespace e_commerce_store.Controllers
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
-            if (newUserResponse.Succeeded)
+            if (newUserResponse.Succeeded){
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                var result = await _signInManager.PasswordSignInAsync(newUser, registerViewModel.Password, true, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
             else{
                 foreach (var error in newUserResponse.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
                 return View(registerViewModel);
             }
             
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Register", "Account");
         }
 
         [HttpPost]
         [Route("Logout")]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

@@ -51,9 +51,9 @@ namespace e_commerce_store.Controllers
                     cart = _cartRepository.MakeCartForUser(user.Id);
 
                 // Check if the product is already in the cart
-                bool productExists = await _cartItemRepository.isProductExistsOnCartAsync(ProductId,cart.Id);
+                var item = await _cartItemRepository.isProductExistsOnCartAsync(ProductId,cart.Id);
 
-                if (!productExists)
+                if (item == null)
                 {
                     // Create a new cart item and associate it with the cart and product
                     CartItem cartItem = new CartItem
@@ -64,6 +64,9 @@ namespace e_commerce_store.Controllers
                     };
 
                     _cartItemRepository.Add(cartItem);
+                }else{
+                    item.Quantity = Quantity;
+                    _cartItemRepository.Update(item);
                 }
             }
         }
@@ -94,6 +97,9 @@ namespace e_commerce_store.Controllers
             var user = await _userManager.GetUserAsync(User);
             var cart = await _cartRepository.GetCartByUserId(user.Id);
 
+            if(user == null)
+                return RedirectToAction("Login","Account");
+
             if(cart == null || cart.CartItems == null || cart.CartItems.Count < 1)
                 return RedirectToAction("Index");
 
@@ -101,8 +107,8 @@ namespace e_commerce_store.Controllers
             var checkOutViewModel = new CheckOutViewModel{
                 UserName = user.UserName,
                 UserEmail = user.Email,
-                TotalPrice = TotalPrice,
-                PhoneNumber = user.PhoneNumber
+                TotalPrice = TotalPrice.ToString(),
+                PhoneNumber = user.PhoneNumber != null ? user.PhoneNumber : ""
             };
             return View(checkOutViewModel);
         }

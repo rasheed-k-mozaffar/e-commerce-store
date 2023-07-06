@@ -27,6 +27,7 @@ namespace e_commerce_store.Models.Repository
             return await _context.CartItems.AsNoTracking().SingleOrDefaultAsync(i => i.Id == CartItemId);
         }
 
+
         public bool Update(CartItem CartItem)
         {
             _context.CartItems.Update(CartItem);
@@ -44,10 +45,10 @@ namespace e_commerce_store.Models.Repository
             return await _context.CartItems.Where(i => i.CartId == CartId).ToListAsync();
         }
 
-        public async Task<bool> isProductExistsOnCartAsync(int ProductId, int CartID)
+        public async Task<CartItem> isProductExistsOnCartAsync(int ProductId, int CartID)
         {
             return await _context.CartItems
-                .AnyAsync(ci => ci.CartId == CartID && ci.ProductId == ProductId);
+                .FirstOrDefaultAsync(ci => ci.CartId == CartID && ci.ProductId == ProductId);
         }
     }
 }

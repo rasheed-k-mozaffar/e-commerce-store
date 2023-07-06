@@ -17,6 +17,7 @@ body
     background-color: antiquewhite;
 }
 
+
 .cartEmpty{
     text-align: center;
     padding: 50px;
@@ -37,6 +38,7 @@ h2,h1{
 
 .table-responsive {
     overflow-x: auto;
+    margin : 20px;
 }
 
 /* تحسين مظهر شريط التمرير */
@@ -142,6 +144,10 @@ button:hover{
     top:70px;
     padding:0;
     margin:0;
+}
+
+.top-filter-static{
+    position: static;
 }
 
 .filter-container {
@@ -276,6 +282,7 @@ nav ul li a:hover,.active
 }
 
 nav ul li button {
+    width:100%;
     display: inline-block;
     padding: 10px 25px;
     color: #c57d1e;
@@ -331,7 +338,7 @@ nav ul li button:hover,
     {
         height: 0;
         position: absolute;
-        top: 80px;
+        top: 70px;
         left: 0;
         right: 0;
         width: 100vw;

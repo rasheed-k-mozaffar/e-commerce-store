@@ -68,7 +68,7 @@
 
             <div class="form-group">
                 <div class="input-box">
-                    <input asp-for="TotalPrice" type="text" placeholder="toatlPrice" required readonly>
+                    <input asp-for="TotalPrice" type="text" placeholder="totalPrice" value="@(Model.TotalPrice + " S.P")" required readonly>
                     <span asp-validation-for="TotalPrice" class="text-danger"></span>
                 </div>
                 @Html.HiddenFor(model => model.TotalPrice)

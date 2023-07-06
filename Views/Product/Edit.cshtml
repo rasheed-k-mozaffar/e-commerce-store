@@ -48,18 +48,19 @@
         <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
-    <button asp-page-handler="Upload" type="submit" class="btn btn-primary">Update</button>
+    <button asp-page-handler="Upload" type="submit">Update</button>
 </form>
-    
+
 <div>
-<label>Current Description Images:</label>
-    @if(Model.CurrentDescriptionImageURLs != null){
+    <label>Current Description Images:</label>
+    @if (Model.CurrentDescriptionImageURLs != null)
+    {
         @foreach (var imageURL in Model.CurrentDescriptionImageURLs)
         {
-        <div id="imageDiv_@imageURL">
-            <a href="@imageURL" target="_blank">Preview Image</a>
-            <button class="btn btn-danger" onclick="deleteImage('@Model.Id', '@imageURL')">Delete Image</button>
-        </div>
+            <div id="imageDiv_@imageURL">
+                <a href="@imageURL" target="_blank">Preview Image</a>
+                <button class="btn btn-danger" onclick="deleteImage('@Model.Id', '@imageURL')">Delete Image</button>
+            </div>
         }
     }
 </div>

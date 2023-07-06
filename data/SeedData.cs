@@ -48,6 +48,7 @@ namespace e_commerce_store.data
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
+                
                 //Roles
                 var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -58,7 +59,7 @@ namespace e_commerce_store.data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                string adminUserEmail = "ismael.ka@protonmail.com";
+                string adminUserEmail = "Admin@lambda.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
@@ -74,7 +75,7 @@ namespace e_commerce_store.data
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
-                string appUserEmail = "user@etickets.com";
+                string appUserEmail = "user@lambda.com";
 
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appUser == null)

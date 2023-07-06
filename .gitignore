@@ -1,9 +1,10 @@
 obj/
 bin/
 publish/
+wwwroot/Image
 *.user
 *.vs
-
+/appsettings.json
 # Packages
 packages/
 

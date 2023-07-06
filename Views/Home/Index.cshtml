@@ -8,6 +8,7 @@
     int resultStart = ((Model.Page - 1) * Model.PageSize) + 1;
     //to ensure that no more results are displayed than there are total products.
     int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -17,11 +18,14 @@
     <link rel="stylesheet" href="~/css/products.css" />
     <link rel="stylesheet" href="~/css/shared-style.css" />
     <link rel="stylesheet" href="~/css/names.css" />
+    <title>Lambda Store</title>
     <script src="~/js/main.js"></script>
 </head>
 <body>
     <header>
-      <div class="logo">Lambda Store</div>
+      <a asp-controller="Home" asp-action="Index">
+        <div class="logo">Lambda Store</div>
+      </a>
       <div class="hamburger">
         <div></div>
         <div></div>
@@ -62,6 +66,9 @@
         hamburger.onclick = function(){
         navBar = document.querySelector("nav");
         navBar.classList.toggle("checked");
+        
+        navBar = document.querySelector(".top-filter");
+        navBar.classList.toggle("top-filter-static");
         }
     </script> 
 
@@ -98,12 +105,14 @@
         <section id="products">
         @if(Model.Products != null){
             @foreach (var item in Model.Products) {
-                <div onclick="Detail('@item.Id')" class="product">
-                    <div>
-                    <img src="@item.ImageURL" alt="@item.Name">
-                    </div>
-                    <h3>@item.Name</h3>                    
-                    <p class="price">@item.Price S.Y</p>
+                <div  class="product">
+                    <a href="@Url.Action("Detail", new {id = @item.Id})">
+                        <div>
+                        <img src="@item.ImageURL" alt="@item.Name">
+                        </div>
+                        <h3>@item.Name</h3>                    
+                        <p class="price">@item.Price S.P</p>
+                    </a>
                     <button id='product_@item.Id' class="cartButton" onclick="addToCart('@item.Id'); event.stopPropagation();">+ add to cart</button>
                 </div>
             }
@@ -139,47 +148,47 @@
     </div>
 
     <script>
-    function addToCart(productId) {
-        var params = 'ProductId=' + encodeURIComponent(productId) + '&Quantity=1';
 
-        fetch('/Cart/AddToCart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: params
-        }).then(function (response) {
-            if (response.ok) {
-                var addToCartButton = document.getElementById(`product_${productId}`);
-                addToCartButton.textContent = 'Added';
-                addToCartButton.disabled = true; // Optional: Disable the button after it's added
-            } else {
-                alert('Failed to add to cart.');
-            }
-        }).catch(function (error) {
-            console.error('Error:', error);
-        });
-    }
+        function addToCart(productId) {
+            var params = 'ProductId=' + encodeURIComponent(productId) + '&Quantity=1';
 
-    function Detail(itemId){
-        window.location.href = '/Home/Detail/' + itemId;
-    }
+            fetch('/Cart/AddToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params
+            }).then(function (response) {
+                if (response.ok &&  response.url.includes('Login') == false) {
+                    var addToCartButton = document.getElementById(`product_${productId}`);
+                    addToCartButton.textContent = 'Added';
+                    addToCartButton.disabled = true; // Optional: Disable the button after it's added
+                } else {
+                    alert('Login to use cart');
+                }
+            }).catch(function (error) {
+                console.error('Error:', error);
+            });
+        }
+
     </script>
 
           <!-- Creators names -->
-  <div class="names">
-    <h5>Created by :</h5>
-    <div class="name">
-      <h6>abd_alrahman_187892</h6>
+  <footer>
+    <div class="names">
+      <h5>Created by :</h5>
+      <div class="name">
+        <h6>abd_alrahman_187892</h6>
+      </div>
+      <div class="name">
+        <h6>ismail_190735</h6>
+      </div>
+      <div class="name">
+        <h6>abdullah_189678</h6>
+      </div>
+      <div class="name">
+        <h6>mohamed_alaa_187379</h6>
+      </div>
     </div>
-    <div class="name">
-      <h6>ismail_190735</h6>
-    </div>
-    <div class="name">
-      <h6>abdullah_189678</h6>
-    </div>
-    <div class="name">
-      <h6>mohamed_alaa_187379</h6>
-    </div>
-  </div>
+  </footer>
 </body>

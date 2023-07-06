@@ -8,7 +8,9 @@
 </head>
 <body>
     <header>
-      <div class="logo">Lambda Store</div>
+      <a asp-controller="Home" asp-action="Index">
+        <div class="logo">Lambda Store</div>
+      </a>
       <div class="hamburger">
         <div></div>
         <div></div>
@@ -47,6 +49,8 @@
         hamburger.onclick = function(){
         navBar = document.querySelector("nav");
         navBar.classList.toggle("checked");
+        navBar = document.querySelector(".top-filter");
+        navBar.classList.toggle("top-filter-static");
         }
     </script> 
 

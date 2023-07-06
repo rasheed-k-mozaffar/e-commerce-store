@@ -1,3 +1,11 @@
+footer {
+  position: sticky;
+  inset: 0;
+  width: 100%;
+  background-color: #c57d1e;
+  padding: 2px;
+  text-align: center;
+}
 .name h6{
     font-size: 12px;
   }
@@ -7,9 +15,6 @@
     margin: 5px;
   }
   .names{
-    position: sticky;
-    bottom: 0;
-    padding: 2px;
     height: fit-content;
     background-color: #c57d1e;
     display: flex;
@@ -34,7 +39,6 @@
         gap : 2px;
     }
     .names h5{
-        grid-column: 1/-1;
         font-size:11px;
     }
   }

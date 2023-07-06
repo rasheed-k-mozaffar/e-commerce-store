@@ -17,9 +17,10 @@ namespace e_commerce_store.ViewModels
         [DataType(DataType.PhoneNumber)]
         public string? PhoneNumber { get; set; } 
 
-        [Required]
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
+        
         [Display(Name = "Confirm password")]
         [Required(ErrorMessage = "Confirm password is required")]
         [DataType(DataType.Password)]

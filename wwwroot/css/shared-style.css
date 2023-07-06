@@ -30,6 +30,10 @@ header
     padding: 0 50px;
 }
 
+.top-filter-static{
+    position: static;
+}
+
 .logo
 {
     color: white;
@@ -79,6 +83,7 @@ nav ul li a:hover,.active
 }
 
 nav ul li button {
+    width:100%;
     display: inline-block;
     padding: 10px 25px;
     color: #c57d1e;
@@ -117,11 +122,12 @@ nav ul li button:hover,
 }
 
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:768px) { 
     .hamburger
     {
         display: block;
         cursor: pointer;
+        
     }
     .hamburger div
     {
@@ -134,7 +140,7 @@ nav ul li button:hover,
     {
         height: 0;
         position: absolute;
-        top: 80px;
+        top: 70px;
         left: 0;
         right: 0;
         width: 100vw;

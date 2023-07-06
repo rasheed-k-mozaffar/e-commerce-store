@@ -22,6 +22,6 @@ namespace e_commerce_store.ViewModels
         public string Address1 { get; set; }    
         [Required]
         public string Address2 { get; set; }  
-        public decimal TotalPrice { get; set; }
+        public string? TotalPrice { get; set; }
     }
 }

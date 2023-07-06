@@ -4,7 +4,7 @@ namespace e_commerce_store.Models.Interfaces
     {
         Task<CartItem> GetCartItemById(int cartItemId);
         Task<List<CartItem>> GetCartItemsList(int cartId);
-        Task<bool> isProductExistsOnCartAsync(int productId,int cartID);
+        Task<CartItem> isProductExistsOnCartAsync(int productId,int cartID);
         bool Add(CartItem cartItem);
         bool Update(CartItem cartItem);
         bool Remove(CartItem cartItem);
