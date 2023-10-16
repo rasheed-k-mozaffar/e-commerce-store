@@ -38,12 +38,12 @@ namespace e_commerce_store.Controllers
             if (user != null)
             {
                 //User is found, check password
-                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password.Trim());
                 
                 if (passwordCheck)
                 {
                     //Password correct, sign in
-                    var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, true, true);
+                    var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password.Trim(), true, true);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
@@ -83,16 +83,16 @@ namespace e_commerce_store.Controllers
 
             var newUser = new AppUser()
             {
-                Name = registerViewModel.Name,
-                Email = registerViewModel.EmailAddress,
-                UserName = registerViewModel.UserName,
-                PhoneNumber = registerViewModel.PhoneNumber
+                Name = registerViewModel.Name.Trim(),
+                Email = registerViewModel.EmailAddress.Trim(),
+                UserName = registerViewModel.UserName.Trim(),
+                PhoneNumber = registerViewModel.PhoneNumber == null ? null : registerViewModel.PhoneNumber.Trim()
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if (newUserResponse.Succeeded){
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-                var result = await _signInManager.PasswordSignInAsync(newUser, registerViewModel.Password, true, true);
+                var result = await _signInManager.PasswordSignInAsync(newUser, registerViewModel.Password.Trim(), true, true);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
