@@ -26,6 +26,7 @@ body{
     overflow-y: scroll;
     overflow-x: hidden;
     background: #000000a8;
+    backdrop-filter: blur(2px);
     color: white;
     padding: 20px 30px;
     border-radius: 10px;
