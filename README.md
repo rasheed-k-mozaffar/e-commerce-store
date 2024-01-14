@@ -64,7 +64,7 @@ If you prefer to use SQL Server, simply change the source to connect to your dat
 **Home:**
 ![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/6908aab3-1a76-406f-90d6-5be62072bd83)
 ![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/651c8e1a-5736-483a-ab46-5065dbafb83e)
-![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/5f4dbc07-ab50-4ba2-9be2-c9cafb93a28a)
+![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/6ae76212-adfe-4e32-80fc-dbe93111b255)
 **Login:**
 ![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/18d06bc1-27c5-4e02-8e15-73bd3f177d3a)
 **Register:**
@@ -77,5 +77,5 @@ If you prefer to use SQL Server, simply change the source to connect to your dat
 **Cart:**
 ![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/fd515dd5-41a3-4713-b6d2-efb264477524)
 **Checkout:**
-![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/6ae76212-adfe-4e32-80fc-dbe93111b255)
+![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/5f4dbc07-ab50-4ba2-9be2-c9cafb93a28a)
 ![image](https://github.com/IsmaelE77/e-commerce-store/assets/93754014/739129b6-d5d2-484a-b77a-eeb24ed1e6fb)
