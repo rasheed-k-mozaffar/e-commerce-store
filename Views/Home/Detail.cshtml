@@ -61,7 +61,7 @@
         navBar = document.querySelector("nav");
         navBar.classList.toggle("checked");
         }
-    </script> 
+    </script>
 
     <!------------------>
     <div id="details-container">
@@ -74,9 +74,12 @@
             <div id="images">
                 <img src="@Model.ImageURL" alt="" id="selected">
                 @if (Model.DescriptionImages != null)
-                  @foreach (var item in Model.DescriptionImages){
-                    <img src="@item.URL" alt="">
-                  }
+                {
+                    foreach (var item in Model.DescriptionImages)
+                    {
+                        <img src="@item.URL" alt="">
+                    }
+                }
             </div>
             <script>
                 let container = document.getElementById('images');
@@ -114,7 +117,7 @@
             <p>@Model.Description</p>
             Copy
             <h4><span class="colored">Release date: </span>@Model.ReleaseDate.ToString("yyyy")</h4>
-            <h4><span class="colored">SKU : </span>@Model.SKU</h3>
+            <h4><span class="colored">SKU : </span>@Model.SKU</h4>
             <h3 id="price">@Model.Price S.P</h3>
             <div>
                 <label for="quantity">quantity : </label>
