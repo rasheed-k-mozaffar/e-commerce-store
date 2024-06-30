@@ -19,9 +19,9 @@
     <div id="details-container">
         <div id="left-screen">
             <div class="img-container">
-                <button id="previous-img"><i class='bx bxs-chevron-left-circle'></i></button>
+                <button id="previous-img"><i style="color:blue" class='bx bxs-chevron-left-circle'></i></button>
                 <img src="@Model.ImageURL" alt="" id="main-image">
-                <button id="next-img"><i class='bx bxs-chevron-right-circle'></i></button>
+                <button id="next-img"><i style="color:blue" class='bx bxs-chevron-right-circle'></i></button>
             </div>
             <div id="images">
                 <img src="@Model.ImageURL" alt="" id="selected">
@@ -63,7 +63,7 @@
                 }
             </script>
         </div>
-        <div id="right-screen">
+        <div id="right-screen" style="min-width:50rem">
             <h2>@Model.Name</h2>
             <h3>Details :</h3>
             <p>@Model.Description</p>
@@ -76,7 +76,7 @@
                 <input type="number" id="quantity" max="100" min="1" value="1"/>
             </div>
             <h3 id="total-price">Total price : </h3>
-            <button id='addToCart' onclick="addToCart('@Model.Id')">Add to Cart</button>
+            <button class="btn btn-primary" id='addToCart' onclick="addToCart('@Model.Id')">Add to Cart</button>
         </div>
     </div>
     <script>
