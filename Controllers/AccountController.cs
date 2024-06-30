@@ -37,26 +37,25 @@ namespace e_commerce_store.Controllers
 
             if (user != null)
             {
-                //User is found, check password
+                // the email is correct, and a user with this email actually exists
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password.Trim());
 
                 if (passwordCheck)
                 {
-                    //Password correct, sign in
+                    // if the password is correct, complete the login and redirect to the home page
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password.Trim(), true, true);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                //Password is incorrect
+                // the password is incorrect
                 ModelState.AddModelError("Password", "Incorrect login credentials");
                 return View(loginViewModel);
             }
-            //User not found
+            // the given email is not registered in the system
              ModelState.AddModelError("Identifier", "The email or username is incorrect");
             return View(loginViewModel);
-
         }
 
 
