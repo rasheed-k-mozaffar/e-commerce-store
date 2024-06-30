@@ -30,9 +30,6 @@
 
         </div>
 
-        <div class="logo">
-            SolEtLuna Store
-        </div>
         <div class="nav-link-group">
                 @if (User.Identity is not null && User.Identity.IsAuthenticated)
                 {
@@ -51,9 +48,15 @@
                             </div>
                         </button>
                     </form>
+                    <div class="logo">
+                        SolEtLuna Store
+                    </div>
                 }
                 else
                 {
+                    <div class="logo">
+                        SolEtLuna Store
+                    </div>
                     <form asp-controller="Account" asp-action="Login" method="post">
                         <button type="submit" class="link">
                             <div>
