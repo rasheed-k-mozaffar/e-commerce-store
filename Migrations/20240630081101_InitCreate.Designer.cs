@@ -11,14 +11,14 @@ using e_commerce_store.data;
 namespace e_commerce_store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230702185103_newDataBase")]
-    partial class newDataBase
+    [Migration("20240630081101_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {

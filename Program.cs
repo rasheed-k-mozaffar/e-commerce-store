@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -37,14 +37,14 @@ builder.Services.AddAuthorization(options =>
           policy.RequireRole("admin"));
 });
 
-builder.Services.ConfigureApplicationCookie(options =>  
-{  
-    options.LoginPath = "/Login";  //set the login page.  
-});  
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login";  //set the login page.
+});
 
 var app = builder.Build();
 
-//await SeedData.SeedUsersAndRolesAsync(app);
+// await SeedData.SeedUsersAndRolesAsync(app);
 
 
 // Configure the HTTP request pipeline.
@@ -54,9 +54,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

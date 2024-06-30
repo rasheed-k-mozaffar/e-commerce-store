@@ -48,7 +48,7 @@ namespace e_commerce_store.data
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                
+
                 //Roles
                 var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -59,7 +59,7 @@ namespace e_commerce_store.data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                string adminUserEmail = "Admin@lambda.com";
+                string adminUserEmail = "Admin@soletlona.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
@@ -71,23 +71,23 @@ namespace e_commerce_store.data
                         Email = adminUserEmail,
                         EmailConfirmed = true,
                     };
-                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.CreateAsync(newAdminUser, "Admin@123");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
-                string appUserEmail = "user@lambda.com";
+                string appUserEmail = "user@soletlona.com";
 
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appUser == null)
                 {
                     var newAppUser = new AppUser()
                     {
-                        Name = "User", 
-                        UserName = "app-user",
+                        Name = "User",
+                        UserName = "soletlona-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,
                     };
-                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.CreateAsync(newAppUser, "User@123");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }

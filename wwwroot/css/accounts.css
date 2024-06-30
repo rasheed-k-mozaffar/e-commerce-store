@@ -1,0 +1,187 @@
+.navigation-bar {
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.navigation-bar ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navigation-bar ul li a {
+    padding: .75rem 1.5rem;
+    background-color: lightblue;
+    color: black;
+    border-radius: 20px;
+    border: 1px solid #030dc7;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    transition: .25s ease;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.logout-button {
+    cursor: pointer;
+    padding: .75rem 1.5rem;
+    background-color: lightblue;
+    color: red;
+    border-radius: 20px;
+    border: 1px solid red;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    transition: .25s ease;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.logout-button:hover {
+    background-color: red;
+    color: white;
+}
+
+.navigation-bar ul li a:hover {
+    background-color: #030dc7;
+    color: white;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    min-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.title {
+    font-size: 28px;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.title::before,.title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+}
+
+.title::before {
+    width: 18px;
+    height: 18px;
+    background-color: royalblue;
+}
+
+.title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+.message, .signin {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+}
+
+.signin a {
+    color: royalblue;
+}
+
+.signin a:hover {
+    text-decoration: underline royalblue;
+}
+
+
+.form label {
+    position: relative;
+}
+
+.form label .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+}
+
+.form label .input + span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+}
+
+.submit:hover {
+    background-color: rgb(56, 90, 194);
+}
+
+@@keyframes pulse {
+     from {
+         transform: scale(0.9);
+         opacity: 1;
+     }
+
+     to {
+         transform: scale(1.8);
+         opacity: 0;
+     }
+ }
+
+.card-container {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

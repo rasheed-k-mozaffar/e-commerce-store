@@ -5,24 +5,25 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="container">
-    <div class="wrapper">
-        <form asp-action="Login" asp-controller="Account">
-        <h1>Login</h1>
-        <div class="input-box">
-            <input asp-for="Identifier" type="text" placeholder="username" required>
-            <span asp-validation-for="Identifier" class="text-danger"></span>
-            <i class='bx bxs-user'></i>
-        </div>
-        <div class="input-box">
-            <input asp-for="Password" type="password" placeholder="password" required>
-            <span asp-validation-for="Password" class="text-danger"></span>
-            <i class='bx bxs-lock-alt'></i>
-        </div>
-        <button type="submit" class="btn">Login</button>
-        <div class="register-link">
-            <p>Don't have an account ? <a asp-action="Register">register</a></p>
-        </div>
-        </form>
-    </div>
+<div class="card-container">
+    <form class="form" asp-action="Login" asp-controller="Account">
+        <p class="title">Login</p>
+        <p class="message">Login to your account!</p>
+        <label>
+            <input required asp-for="Identifier" placeholder="" type="text" class="input">
+            <span>Username</span>
+            <span asp-validation-for="Identifier" class="validation-msg"></span>
+        </label>
+
+        <label>
+            <input asp-for="Password" required placeholder="" type="password" class="input">
+            <span>Password</span>
+            <span asp-validation-for="Password" class="validation-msg"></span>
+        </label>
+
+        <div asp-validation-summary="ModelOnly" class="validation-msg"></div>
+
+        <button class="submit" type="submit">Login</button>
+        <p>Don't have an account ? <a asp-action="Register">Sign up</a></p>
+    </form>
 </div>

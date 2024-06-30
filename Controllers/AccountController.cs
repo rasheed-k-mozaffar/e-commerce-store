@@ -32,14 +32,14 @@ namespace e_commerce_store.Controllers
         public async Task<IActionResult> Login(LoginViewModel loginViewModel){
             if (!ModelState.IsValid) return View(loginViewModel);
 
-            var user = await _userManager.FindByEmailAsync(loginViewModel.Identifier) ?? 
+            var user = await _userManager.FindByEmailAsync(loginViewModel.Identifier) ??
             await _userManager.FindByNameAsync(loginViewModel.Identifier);
 
             if (user != null)
             {
                 //User is found, check password
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password.Trim());
-                
+
                 if (passwordCheck)
                 {
                     //Password correct, sign in
@@ -50,11 +50,11 @@ namespace e_commerce_store.Controllers
                     }
                 }
                 //Password is incorrect
-                ModelState.AddModelError("Password", "Wrong password. Please try again");
+                ModelState.AddModelError("Password", "Incorrect login credentials");
                 return View(loginViewModel);
             }
             //User not found
-             ModelState.AddModelError("Identifier", "Wrong email/userName. Please try again");
+             ModelState.AddModelError("Identifier", "The email or username is incorrect");
             return View(loginViewModel);
 
         }
@@ -77,7 +77,7 @@ namespace e_commerce_store.Controllers
             var user = await _userManager.FindByEmailAsync(registerViewModel.EmailAddress);
             if (user != null)
             {
-                ModelState.AddModelError("EmailAddress", "This email address is already in use");
+                ModelState.AddModelError("EmailAddress", "Email is already taken");
                 return View(registerViewModel);
             }
 
@@ -103,7 +103,7 @@ namespace e_commerce_store.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 return View(registerViewModel);
             }
-            
+
             return RedirectToAction("Register", "Account");
         }
 
