@@ -2,7 +2,7 @@
 @model IndexProductViewModel
 
 @{
-    Layout = null;
+    Layout = "_Layout";
     ViewData["Title"] = "Home";
     //Page*PageSize = the Products on this page and + 1 to get number of first item on this page
     int resultStart = ((Model.Page - 1) * Model.PageSize) + 1;
@@ -10,185 +10,111 @@
     int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
 
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/products.css" />
-    <link rel="stylesheet" href="~/css/shared-style.css" />
-    <link rel="stylesheet" href="~/css/names.css" />
-    <title>Lambda Store</title>
-    <script src="~/js/main.js"></script>
-</head>
-<body>
-    <header>
-      <a asp-controller="Home" asp-action="Index">
-        <div class="logo">Lambda Store</div>
-      </a>
-      <div class="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <nav>
-        <ul>
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            @if(User.Identity.IsAuthenticated && User.IsInRole("admin")){
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                </li>
-            }
-            @if(User.Identity.IsAuthenticated){
-                <li>
-                <a asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
-                </li>
-                <li class="nav-item">
-                    <form asp-controller="Account" asp-action="Logout" method="post">
-                        <button type="submit">Logout</button>
-                    </form>
-                </li>
-            }else{
-                <li>
-                <a asp-area="" asp-controller="Account" asp-action="Login">My Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                </li>
-            }
-        </ul>
-      </nav>
-    </header>
-    <script>
-        hamburger = document.querySelector(".hamburger");
-        hamburger.onclick = function(){
-        navBar = document.querySelector("nav");
-        navBar.classList.toggle("checked");
-        
-        navBar = document.querySelector(".top-filter");
-        navBar.classList.toggle("top-filter-static");
-        }
-    </script> 
 
-
-
-    <div class="top-filter">
-        <div class="filter-container">
-            <form asp-action="Index" asp-controller="Home" method="get">
-                <div class="form-group">
-                    <label for="CategoryId">Category</label>
-                    <input type="hidden" name="pageSize" value="@Model.PageSize" />
-                    <input type="hidden" name="SearchString" value="@Model.searchString" />
-                    <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control category">
-                        <option value="-1">All Categories</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary filter-btn">Filter</button>
-                </div>
-            </form>
-
-            <form asp-action="Index" asp-controller="Home" method="get">
-                <div class="from-group">
-                    <label>Find by name: </label>
-                    <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
-                    <input type="submit" value="Search" class="filter-btn" />
-                    <input type="hidden" name="page" value="1" />
-                    <input type="hidden" name="pageSize" value="@Model.PageSize" />
-                    <input type="hidden" name="categoryId" value="@Model.CategoryId" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="content">
-        <section id="products">
-        @if(Model.Products != null){
-            @foreach (var item in Model.Products) {
-                <div  class="product">
-                    <a href="@Url.Action("Detail", new {id = @item.Id})">
-                        <div>
-                        <img src="@item.ImageURL" alt="@item.Name">
-                        </div>
-                        <h3>@item.Name</h3>                    
-                        <p class="price">@item.Price S.P</p>
-                    </a>
-                    <button id='product_@item.Id' class="cartButton" onclick="addToCart('@item.Id'); event.stopPropagation();">+ add to cart</button>
-                </div>
-            }
-        }
-        </section>
-    </div>
-
-    <div>
-        <div class="col-md-12">
-            <div aria-label="Page navigation example" class="bottom">
-                <ul class="pagination">
-                    @if (Model.Page > 1)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
-                        </li>
-                    }
-                    @for (int i = 1; i <= Model.TotalPages; i++)
-                    {
-                        <li class="page-item">
-                            <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
-                        </li>
-                    }
-                    @if (Model.Page < Model.TotalPages)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
-                        </li>
-                    }
-                </ul>
+<div class="top-filter">
+    <div class="filter-container">
+        <form asp-action="Index" asp-controller="Home" method="get">
+            <div class="form-group">
+                <label for="CategoryId">Category</label>
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                <input type="hidden" name="SearchString" value="@Model.searchString" />
+                <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control category">
+                    <option value="-1">All Categories</option>
+                </select>
+                <button type="submit" class="btn btn-primary filter-btn">Filter</button>
             </div>
+        </form>
+
+        <form asp-action="Index" asp-controller="Home" method="get">
+            <div class="from-group">
+                <label>Find by name: </label>
+                <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
+                <input type="submit" value="Search" class="filter-btn" />
+                <input type="hidden" name="page" value="1" />
+                <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <section id="products">
+    @if(Model.Products != null){
+        @foreach (var item in Model.Products) {
+            <div  class="product">
+                    <div>
+                        <img src="@item.ImageURL" alt="@item.Name">
+                    </div>
+                    <a href="@Url.Action("Detail", new {id = @item.Id})">
+                        <h3>@item.Name</h3>
+                    </a>
+
+                    @if (item.Description?.Length > 30)
+                    {
+                        <p>@item.Description.Substring(0,30)...</p>
+                    }
+                    else
+                    {
+                        <p>@item.Description?.Substring(0)</p>
+                    }
+                    <p class="price">@item.Price S.P</p>
+                <button id='product_@item.Id' class="cartButton" onclick="addToCart('@item.Id'); event.stopPropagation();">+ add to cart</button>
+            </div>
+        }
+    }
+    </section>
+</div>
+
+<div>
+    <div class="col-md-12">
+        <div aria-label="Page navigation example" class="bottom">
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item">
+                        <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
 
-        function addToCart(productId) {
-            var params = 'ProductId=' + encodeURIComponent(productId) + '&Quantity=1';
+    function addToCart(productId) {
+        var params = 'ProductId=' + encodeURIComponent(productId) + '&Quantity=1';
 
-            fetch('/Cart/AddToCart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: params
-            }).then(function (response) {
-                if (response.ok &&  response.url.includes('Login') == false) {
-                    var addToCartButton = document.getElementById(`product_${productId}`);
-                    addToCartButton.textContent = 'Added';
-                    addToCartButton.disabled = true; // Optional: Disable the button after it's added
-                } else {
-                    alert('Login to use cart');
-                }
-            }).catch(function (error) {
-                console.error('Error:', error);
-            });
-        }
+        fetch('/Cart/AddToCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        }).then(function (response) {
+            if (response.ok &&  response.url.includes('Login') == false) {
+                var addToCartButton = document.getElementById(`product_${productId}`);
+                addToCartButton.textContent = 'Added';
+                addToCartButton.disabled = true; // Optional: Disable the button after it's added
+            } else {
+                alert('Login to use cart');
+            }
+        }).catch(function (error) {
+            console.error('Error:', error);
+        });
+    }
 
-    </script>
-
-          <!-- Creators names -->
-  <footer>
-    <div class="names">
-      <h5>Created by :</h5>
-      <div class="name">
-        <h6>abd_alrahman_187892</h6>
-      </div>
-      <div class="name">
-        <h6>ismail_190735</h6>
-      </div>
-      <div class="name">
-        <h6>abdullah_189678</h6>
-      </div>
-      <div class="name">
-        <h6>mohamed_alaa_187379</h6>
-      </div>
-    </div>
-  </footer>
-</body>
+</script>

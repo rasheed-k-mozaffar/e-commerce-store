@@ -6,14 +6,8 @@
     flex-wrap: wrap;
 }
 
-.content{
-    flex:1;
-
-}
-
-
 a {
-    color: #c57d1e;
+    color: #0a53be;
 }
 
 .product {
@@ -23,10 +17,10 @@ a {
     padding:10px;
     margin-bottom: 30px;
     background-color: white;
-    color: #c57d1e;
-    /* border: solid 2px #c57d1e; */
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px #dcb480;
+    color: #0a53be;
+    border: solid 2px gray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px lightgray;
     text-align: center;
     width: 23%;
     cursor: pointer;
@@ -63,22 +57,22 @@ a {
 
 .cartButton {
     width: 95%;
-    height: 40px;
+    height: 50px;
     margin: 5px;
-    background: #c57d1e;
+    background: #0a53be;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .increaseProducts, .decreaseProducts {
     font-size: large;
     width: 30px;
     height: 30px;
-    background: #c57d1e;
+    background: #0a53be;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .increaseProducts {
@@ -90,12 +84,11 @@ a {
 }
 
 .cartButton:hover, .increaseProducts:hover, .decreaseProducts:hover {
-    background: #815214;
+    background: #083f8f;
     cursor: pointer;
 }
 
 .top-filter{
-    background-color:antiquewhite;
     position:sticky;
     top:70px;
     padding:0;
@@ -106,7 +99,7 @@ a {
     padding:10px 0;
     display: flex;
     justify-content: space-around;
-    color: #c57d1e;
+    color: #0a53be;
     /*border-bottom:2px solid #c57d1e;*/
 }
 
@@ -121,54 +114,20 @@ hr{
 .filter-btn {
     margin: 5px;
     padding: 5px;
-    background: #c57d1e;
+    background: #0a53be;
     color: white;
     border: none;
-    border-radius: 5px;
-    box-shadow: 3px 3px 8px #dcb480;
+    border-radius: 10px;
 }
 
 .search, .category {
     border: none;
     outline: none;
     padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 8px #dcb480;
+    border-radius: 10px;
 }
 .search{
     width:150px;
-}
-
-.bottom {
-    background-color: #c57d1e;
-    height: 40px;
-    margin:5px 20%;
-    border-radius:10px;
-}
-
-.bottom ul {
-    display: flex;
-    justify-content:center;
-}
-
-.bottom ul li {
-    /* display: inline-block; */
-    line-height: 40px;
-    margin: 0 5px;
-}
-
-.bottom ul li a {
-    /* display: block; */
-    padding: 10px 25px;
-    color: white;
-    font-size: 16px;
-    text-transform: uppercase;
-    border-radius: 40px;
-}
-
-.bottom ul li a:hover , .active-number{
-    background-color: #dcb480;
-    transition: 0.3s;
 }
 
 
@@ -176,9 +135,7 @@ hr{
     .product {
         margin-bottom: 20px;
         background-color: white;
-        color: #c57d1e;
         border-radius: 5px;
-        box-shadow: 3px 3px 5px #dcb480;
         text-align: center;
         width: 45%;
     }
