@@ -10,85 +10,88 @@
     int resultEnd = Math.Min(resultStart -1 + Model.PageSize , Model.TotalProducts);
 
 }
+<div style="min-height:80rem">
 
-<div class="top-filter">
-    <div class="filter-container">
-        <form asp-action="Index" asp-controller="Home" method="get">
-            <div class="form-group">
-                <label for="CategoryId">Category</label>
-                <input type="hidden" name="pageSize" value="@Model.PageSize" />
-                <input type="hidden" name="SearchString" value="@Model.searchString" />
-                <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control category">
-                    <option value="-1">All Categories</option>
-                </select>
-                <button type="submit" class="btn btn-primary filter-btn">Filter</button>
-            </div>
-        </form>
+    <div class="top-filter" style="display:flex;justify-content:center;align-content:center;align-items:center;z-index:">
+        <div class="filter-container">
+            <form asp-action="Index" asp-controller="Home" method="get">
+                <div class="form-group" style="display:flex;justify-content:center;align-content:center;align-items:center">
+                    <label for="CategoryId">Category</label>
+                    <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                    <input type="hidden" name="SearchString" value="@Model.searchString" />
+                    <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control category">
+                        <option value="-1">All Categories</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary filter-btn">Filter</button>
+                </div>
+            </form>
 
-        <form asp-action="Index" asp-controller="Home" method="get">
-            <div class="from-group">
-                <label>Find by name: </label>
-                <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
-                <input type="submit" value="Search" class="filter-btn" />
-                <input type="hidden" name="page" value="1" />
-                <input type="hidden" name="pageSize" value="@Model.PageSize" />
-                <input type="hidden" name="categoryId" value="@Model.CategoryId" />
-            </div>
-        </form>
+            <form asp-action="Index" asp-controller="Home" method="get">
+                <div class="from-group">
+                    <label>Find by name: </label>
+                    <input type="text" name="SearchString" id="SearchString" class="search" placeholder="Enter name..." value="@Model.searchString" />
+                    <input type="submit" value="Search" class="filter-btn" />
+                    <input type="hidden" name="page" value="1" />
+                    <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                    <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+                </div>
+            </form>
+
+        </div>
     </div>
-</div>
 
-<div class="content">
-    <section id="products">
-    @if(Model.Products != null){
-        @foreach (var item in Model.Products) {
-            <div  class="product">
-                    <div>
-                        <img src="@item.ImageURL" alt="@item.Name">
-                    </div>
-                    <a href="@Url.Action("Detail", new {id = @item.Id})">
-                        <h3>@item.Name</h3>
-                    </a>
+    <div class="content">
+        <section id="products">
+        @if(Model.Products != null){
+            @foreach (var item in Model.Products) {
+                <div  class="product">
+                        <div>
+                            <img src="@item.ImageURL" alt="@item.Name">
+                        </div>
+                        <a href="@Url.Action("Detail", new {id = @item.Id})">
+                            <h3>@item.Name</h3>
+                        </a>
 
-                    @if (item.Description?.Length > 30)
-                    {
-                        <p>@item.Description.Substring(0,30)...</p>
-                    }
-                    else
-                    {
-                        <p>@item.Description?.Substring(0)</p>
-                    }
-                    <p class="price">@item.Price S.P</p>
-                <button id='product_@item.Id' class="cartButton" onclick="addToCart('@item.Id'); event.stopPropagation();">+ add to cart</button>
-            </div>
+                        @if (item.Description?.Length > 30)
+                        {
+                            <p>@item.Description.Substring(0,30)...</p>
+                        }
+                        else
+                        {
+                            <p>@item.Description?.Substring(0)</p>
+                        }
+                        <p class="price">@item.Price S.P</p>
+                    <button id='product_@item.Id' class="cartButton" onclick="addToCart('@item.Id'); event.stopPropagation();">+ add to cart</button>
+                </div>
+            }
         }
-    }
-    </section>
-</div>
+        </section>
+    </div>
 
-<div>
-    <div class="col-md-12">
-        <div aria-label="Page navigation example" class="bottom">
-            <ul class="pagination">
-                @if (Model.Page > 1)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
-                    </li>
-                }
-                @for (int i = 1; i <= Model.TotalPages; i++)
-                {
-                    <li class="page-item">
-                        <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
-                    </li>
-                }
-                @if (Model.Page < Model.TotalPages)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
-                    </li>
-                }
-            </ul>
+    <div>
+        <div class="col-md-12">
+            <div aria-label="Page navigation example" class="bottom">
+                <ul class="pagination">
+                    @if (Model.Page > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page - 1, categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Previous</a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link @(i == Model.Page ? "active-number" : "")" href="@Url.Action("Index", new {searchString = Model.searchString , page = i, categoryId = Model.CategoryId, pageSize = Model.PageSize })">@i</a>
+                        </li>
+                    }
+                    @if (Model.Page < Model.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new {searchString = Model.searchString, page = Model.Page + 1,  categoryId = Model.CategoryId ,pageSize = Model.PageSize })">Next</a>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>

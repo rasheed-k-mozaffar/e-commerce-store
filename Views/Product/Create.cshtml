@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Create Product";
 }
+<div style ="display:flex;justify-content:center;align-content:center;align-items:center">
 
+<div style="min-height:100rem; max-width:80rem;">
 <form asp-action="Create" enctype="multipart/form-data">
     <h3 style="text-align:center;">Add a product</h3>
     <div class="form-group">
@@ -46,5 +48,9 @@
         </select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
-    <button asp-page-handler="Upload" type="submit">Add</button>
+    <div style="display:flex;justify-content:center; margin-top:10px">
+        <button class="btn btn-primary "  asp-page-handler="Upload" type="submit">Add</button>
+    </div>
 </form>
+</div>
+</div>

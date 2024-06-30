@@ -7,9 +7,9 @@
 }
 
 <div class="top-filter">
-    <div class="filter-container">
+    <div class="filter-container" style="">
         <form asp-action="Products" asp-controller="Dashboard" method="get">
-            <div class="form-group">
+            <div class="form-group" style="display:flex;justify-content:center;align-content:center;align-items:center">
                 <label for="CategoryId">Category</label>
                 <input type="hidden" name="pageSize" value="@Model.PageSize" />
                 <input type="hidden" name="SearchString" value="@Model.searchString" />
@@ -34,7 +34,10 @@
 </div>
 
 <div class="content">
-    <div class="table-responsive">
+    <div class="col-md-12">
+        <a type="button" style="margin-left:25px" class="btn btn-primary" asp-controller="Product" asp-action="Create">Add new product</a>
+    </div>
+    <div class="table-responsive" style="min-height:80rem">
         <table class="table">
         <thead>
             <tr>
@@ -79,9 +82,7 @@
         </tbody>
     </table>
     </div>
-    <div class="col-md-12">
-        <a type="button" class="btn btn-primary" asp-controller="Product" asp-action="Create">Add</a>
-    </div>
+
 </div>
 
 <div>

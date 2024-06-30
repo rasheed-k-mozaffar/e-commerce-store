@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/shared.css" />
+    <link rel="stylesheet" href="~/e_commerce_store.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+    <link rel="stylesheet" href="~/css/products.css" />
+    <link rel="stylesheet" href="~/css/names.css" />
 </head>
 <body>
     <header>
       <a asp-controller="Home" asp-action="Index">
-        <div class="logo">Lambda Store</div>
+            <div style="text-align:center" class="logo">SolEtLuna Store</div>
       </a>
       <div class="hamburger">
         <div></div>
@@ -17,7 +23,7 @@
         <div></div>
       </div>
       <nav>
-        <ul>
+        <ul style="display:flex;justify-content:center">
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             </li>
