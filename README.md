@@ -32,3 +32,17 @@ Email: `soletlona-user` <br/>
 Password: `User@123`
 
 You can then browse freely or access administrative functions if you log in as admin
+
+
+# User Interface
+<img width="1680" alt="Home page" src="https://github.com/rasheed-k-mozaffar/e-commerce-store/assets/109946031/3949f757-26c1-4d6d-9c3d-c7c49fead6c4">
+
+<img width="1680" alt="Login page" src="https://github.com/rasheed-k-mozaffar/e-commerce-store/assets/109946031/051929fd-9df8-4182-af9d-e7af7413bf2b">
+
+<img width="1680" alt="Product details page" src="https://github.com/rasheed-k-mozaffar/e-commerce-store/assets/109946031/a5c02a02-63fa-4dfd-9fb1-8a7f4be5ec2a">
+
+<img width="784" alt="Checkout page" src="https://github.com/rasheed-k-mozaffar/e-commerce-store/assets/109946031/c5cb00d9-7e3c-4cdd-ab42-d8ea0a6ad046">
+
+<img width="1680" alt="Admin dashboard" src="https://github.com/rasheed-k-mozaffar/e-commerce-store/assets/109946031/78c57bae-a354-4e6a-af2f-95e5d8a4474d">
+
+
