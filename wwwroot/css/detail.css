@@ -60,7 +60,7 @@ button{
 }
 
 button:hover{
-    background: #815214;
+    background: blue;
     cursor: pointer;
 }
 
@@ -77,7 +77,7 @@ button:hover{
 }
 
 .img-container button:hover{
-    background: #dcb480;
+    background: blue;
 }
 
 #images{
@@ -115,7 +115,7 @@ button:hover{
 }
 
 #right-screen::-webkit-scrollbar-thumb {
-    background: #c57d1e; /* Color of the thumb */
+    background: deepskyblue; /* Color of the thumb */
     border-radius: 50px;
 }
 
