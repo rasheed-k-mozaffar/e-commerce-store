@@ -1,5 +1,5 @@
 @{
-    Layout = null;
+    Layout = "_LoginLayout";
 }
 
 <!DOCTYPE html>
@@ -7,14 +7,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/order-suceed.css"/>
+    <link rel="stylesheet" href="~/css/order-succeeded.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <title>Order Confirmation</title>
 </head>
 <body>
     <div class="container">
-        <div class="wrapper">
-            <h1>your order succeeded</h1>
-            <a asp-controller="Home" asp-action="Index">go back to home</a>
+        <div class="confirmation-card">
+            <h1>The order was successfully placed</h1>
+            <p>Order preparation process has started<br/>
+                Your order should arrive at your door shortly!
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">
+                Shop More Products
+            </a>
         </div>
     </div>
 </body>

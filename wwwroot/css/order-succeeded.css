@@ -1,0 +1,17 @@
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    column-gap: 1rem;
+    gap: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px gray;
+}

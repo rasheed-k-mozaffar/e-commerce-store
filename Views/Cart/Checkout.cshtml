@@ -4,78 +4,67 @@
     ViewData["Title"] = "Checkout";
 }
 
-<div class="container">
-    <div class="wrapper">
-        <form asp-action="Checkout" asp-controller="Cart">
-            <h1>Checkout</h1>
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="UserName" type="text" placeholder="username" required readonly>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                @Html.HiddenFor(model => model.UserName)
-            </div>
+<div class="card-container">
+    <form class="form" asp-action="Checkout" asp-controller="Cart">
+        <p class="title">Checkout</p>
+        <label>
+            <input required asp-for="UserName" placeholder="" type="text" class="input">
+            <span>Username</span>
+            <span asp-validation-for="UserName" class="validation-msg"></span>
+            @Html.HiddenFor(model => model.UserName)
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="UserEmail" type="email" placeholder="email" required readonly>
-                    <span asp-validation-for="UserEmail" class="text-danger"></span>
-                </div>
-                @Html.HiddenFor(model => model.UserEmail)
-            </div>
+        <label>
+            <input asp-for="UserEmail" required placeholder="" type="email" class="input">
+            <span>Email</span>
+            <span asp-validation-for="UserEmail" class="validation-msg"></span>
+            @Html.HiddenFor(model => model.UserEmail)
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="PhoneNumber" type="tel" placeholder="phone number" required>
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="PhoneNumber" required placeholder="" type="text" class="input">
+            <span>Phone Number</span>
+            <span asp-validation-for="PhoneNumber" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="FirstName" type="text" placeholder="first name" required>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="FirstName" required placeholder="" type="text" class="input">
+            <span>First Name</span>
+            <span asp-validation-for="FirstName" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="LastName" type="text" placeholder="last name" required>
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="LastName" required placeholder="" type="text" class="input">
+            <span>Last Name</span>
+            <span asp-validation-for="LastName" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="City" type="text" placeholder="city" required>
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="City" required placeholder="" type="text" class="input">
+            <span>City</span>
+            <span asp-validation-for="City" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="Address1" type="text" placeholder="address line 1" required>
-                    <span asp-validation-for="Address1" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="Address1" required placeholder="" type="text" class="input">
+            <span>Address 1</span>
+            <span asp-validation-for="Address1" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="Address2" type="text" placeholder="address line 2">
-                    <span asp-validation-for="Address2" class="text-danger"></span>
-                </div>
-            </div>
+        <label>
+            <input asp-for="Address2" required placeholder="" type="text" class="input">
+            <span>Address 2</span>
+            <span asp-validation-for="Address2" class="validation-msg"></span>
+        </label>
 
-            <div class="form-group">
-                <div class="input-box">
-                    <input asp-for="TotalPrice" type="text" placeholder="totalPrice" value="@(Model.TotalPrice + " S.P")" required readonly>
-                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
-                </div>
-                @Html.HiddenFor(model => model.TotalPrice)
-            </div>
+        <label>
+            <input asp-for="TotalPrice" required placeholder="" type="text" hidden="hidden">
+            <h4>Total: @(Model.TotalPrice + "S.p")</h4>
+            <span asp-validation-for="TotalPrice" class="validation-msg"></span>
+            @Html.HiddenFor(model => model.TotalPrice)
+        </label>
 
-            <button type="submit" class="btn">Place Order</button>
-        </form>
-    </div>
+        <button type="submit" class="submit">Place Order</button>
+    </form>
 </div>
 
